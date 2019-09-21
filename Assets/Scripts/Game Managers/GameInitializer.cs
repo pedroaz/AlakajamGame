@@ -32,7 +32,7 @@ public class GameInitializer : MonoBehaviour
     {
         levelManager.AddLevel();
         levelPanel.ShowPanel(levelManager.GetCurrentLevel());
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         StartNextWave();
     }
 }

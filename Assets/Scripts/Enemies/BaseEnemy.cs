@@ -15,6 +15,8 @@ public class BaseEnemy : MonoBehaviour
     private Castle castle;
     private  bool canAttackCastle;
     private bool isAttacking;
+
+    public List<GameObject> listOfItems;
     
 
     private void Awake()
@@ -25,6 +27,11 @@ public class BaseEnemy : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown("space")) {
+
+            Die();
+        }
+
         if (canAct && !isAttacking) {
             Act();
         }
@@ -66,12 +73,17 @@ public class BaseEnemy : MonoBehaviour
     {
         DropItem();
         GlobalEvents.EnemyDeath(this, null);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     internal virtual void DropItem()
     {
+        if(listOfItems.Count > 0) {
 
+            int index = Random.Range(0, listOfItems.Count);
+            GameObject item = Instantiate(listOfItems[index], this.transform.position, Quaternion.identity);
+        }
+        
     }
 
     public void StartActing()

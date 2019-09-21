@@ -182,6 +182,9 @@ MonoBehaviour:
   damageToCastle: 5
   enemyLevel: 1
   attackCD: 3
+  listOfItems:
+  - {fileID: 8391833476481187958, guid: 20578911da253c345ac2ca3324abf0c2, type: 3}
+  - {fileID: 574381872466009549, guid: 1417a76ad7984394fb182b6224a17e68, type: 3}
 --- !u!1 &7440797619782924297
 GameObject:
   m_ObjectHideFlags: 0

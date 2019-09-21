@@ -130,7 +130,7 @@ public class EnemySpawner : MonoBehaviour
     {
         amountOfEnemiesKilled++;
         if(amountOfEnemiesKilled == GetAmountOfEnemiesOfLevel()) {
-
+            gameInitializer.EndWave();
         }
     }
 
