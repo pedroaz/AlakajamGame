@@ -21,6 +21,11 @@ public class SpriteBase : MonoBehaviour
         GlobalEvents.OnPlayerCollision += SpritePushback;
     }
 
+    private void Destroy()
+    {
+        GlobalEvents.OnPlayerCollision -= SpritePushback;
+    }
+
     void Start()
     {
         boxCollider = gameObject.GetComponent<BoxCollider2D>();

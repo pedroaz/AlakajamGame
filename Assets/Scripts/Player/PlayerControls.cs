@@ -10,6 +10,8 @@ public class PlayerControls : SpriteBase
     public GameObject baseWeaponObjLeft;
     public GameObject baseWeaponObjRight;
 
+    private bool bIsAttacking = false;
+
     void FixedUpdate()
     {
         #region Player Movement
@@ -18,7 +20,8 @@ public class PlayerControls : SpriteBase
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             boxCollider.transform.Translate(transform.TransformDirection(input * speed * Time.deltaTime));
 
-            spriteRenderer.flipX = (input.x < 0);
+            if(!bIsAttacking)
+                spriteRenderer.flipX = (input.x < 0);
         }
         #endregion
 
@@ -27,7 +30,7 @@ public class PlayerControls : SpriteBase
             transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
         }
 
-        if (canAct && Input.GetKeyUp("space"))
+        if (canAct && Input.GetKeyUp("space") && !bIsAttacking)
         {
             StartCoroutine(PlayerAttack());
         }
@@ -35,6 +38,8 @@ public class PlayerControls : SpriteBase
 
     IEnumerator PlayerAttack()
     {
+        bIsAttacking = true;
+
         spriteRenderer.flipX = !spriteRenderer.flipX;
         if(!spriteRenderer.flipX)
             baseWeaponObjLeft.SetActive(true);
@@ -46,5 +51,7 @@ public class PlayerControls : SpriteBase
         spriteRenderer.flipX = !spriteRenderer.flipX;
         baseWeaponObjLeft.SetActive(false);
         baseWeaponObjRight.SetActive(false);
+
+        bIsAttacking = false;
     }
 }
