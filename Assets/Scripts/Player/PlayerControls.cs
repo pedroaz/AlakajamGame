@@ -6,12 +6,13 @@ public class PlayerControls : MonoBehaviour
 {
     public float speed;
 
-    private CharacterController characterController;
-    public BoxCollider2D boxCollider;
+    private BoxCollider2D boxCollider;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        characterController = gameObject.GetComponent<CharacterController>();
+        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -21,7 +22,16 @@ public class PlayerControls : MonoBehaviour
         {
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             boxCollider.transform.Translate(transform.TransformDirection(input * speed * Time.deltaTime));
+
+            spriteRenderer.flipX = (input.x < 0);
         }
         #endregion
+    }
+
+    public void PlayerPushback(object sender, System.EventArgs e)
+    {
+        PlayerCollisionArgs arg = (PlayerCollisionArgs) e;
+
+        boxCollider.transform.Translate(transform.TransformDirection(arg.direction * arg.pushbackValue * Time.deltaTime));
     }
 }
