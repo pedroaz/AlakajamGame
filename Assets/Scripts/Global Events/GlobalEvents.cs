@@ -62,13 +62,14 @@ public static class GlobalEvents
 public class CastleDamageArgs : EventArgs
 {
     public int damageTaken;
-
     public int currentCastleHealth;
+    public int maxHealth;
 
-    public CastleDamageArgs(int damageTaken, int currentCastleHealth)
+    public CastleDamageArgs(int damageTaken, int currentCastleHealth, int maxHealth)
     {
         this.damageTaken = damageTaken;
         this.currentCastleHealth = currentCastleHealth;
+        this.maxHealth = maxHealth;
     }
 }
 

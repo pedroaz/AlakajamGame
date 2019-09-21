@@ -10,11 +10,14 @@ public class BaseEnemy : MonoBehaviour
     public int enemyLevel;
     public bool canAct;
     private Transform castleTransform;
-
+    private Castle castle;
+    public bool canAttackCastle;
+    public float attackCD;
 
     private void Awake()
     {
-        castleTransform = FindObjectOfType<Castle>().transform;
+        castle = FindObjectOfType<Castle>();
+        castleTransform = castle.transform;
     }
 
     private void Update()
@@ -26,16 +29,33 @@ public class BaseEnemy : MonoBehaviour
 
     public virtual void Act()
     {
+        if (canAttackCastle) {
+
+            StartCoroutine(AttackCastle());
+        }
+        else{
+            MoveTowardsCastle();
+        }
+    }
+
+    internal virtual IEnumerator AttackCastle()
+    {
+        Attack();
+        yield return new WaitForSeconds(attackCD);
+    }
+
+    internal virtual void Attack()
+    {
+        castle.HurtCastle(damateToCastle);
+    }
+
+    private void MoveTowardsCastle()
+    {
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, castleTransform.position, step);
     }
 
-    public virtual void DropItem()
-    {
-
-    }
-
-    public void SpawnEnemy()
+    internal virtual void DropItem()
     {
 
     }
@@ -48,6 +68,16 @@ public class BaseEnemy : MonoBehaviour
     public void StopActing()
     {
         canAct = false;
+    }
+
+    public bool IsInRangeOfCastle()
+    {
+        return false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
