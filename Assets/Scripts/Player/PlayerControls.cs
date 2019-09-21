@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerControls : SpriteBase
 {
     public float speed;
+    public float atkSpeed = 0.07f;
+
+    public GameObject baseWeaponObjLeft;
+    public GameObject baseWeaponObjRight;
+    public GameObject playerArea;
 
     void FixedUpdate()
     {
@@ -22,5 +27,27 @@ public class PlayerControls : SpriteBase
         {
             transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
         }
+
+        if (canAct && Input.GetKeyUp("space"))
+        {
+            StartCoroutine(PlayerAttack());
+        }
+    }
+
+    IEnumerator PlayerAttack()
+    {
+        var playerAreaCollider = playerArea.GetComponent<BoxCollider2D>();
+
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+        if(!spriteRenderer.flipX)
+            baseWeaponObjLeft.SetActive(true);
+        else
+            baseWeaponObjRight.SetActive(true);
+
+        yield return new WaitForSeconds(atkSpeed);
+
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+        baseWeaponObjLeft.SetActive(false);
+        baseWeaponObjRight.SetActive(false);
     }
 }

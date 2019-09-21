@@ -9,34 +9,43 @@ public class BaseEnemy : SpriteBase
     public int damageToCastle;
     public int enemyLevel;
 
-    private bool canAct;
     public float attackCD;
 
     private Transform castleTransform;
     private Castle castle;
-    private  bool canAttackCastle;
+    private bool canAttackCastle;
     private bool isAttacking;
-    
+
 
     private void Awake()
     {
         castle = FindObjectOfType<Castle>();
         castleTransform = castle.transform;
+
+        GlobalEvents.OnWeaponCollision += TakeDamageFromPlayer;
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEvents.OnWeaponCollision -= TakeDamageFromPlayer;
     }
 
     private void Update()
     {
-        if (canAct && !isAttacking) {
+        if (canAct && !isAttacking)
+        {
             Act();
         }
     }
 
     public virtual void Act()
     {
-        if (canAttackCastle) {
+        if (canAttackCastle)
+        {
             StartCoroutine(AttackCastle());
         }
-        else{
+        else
+        {
             MoveTowardsCastle();
         }
     }
@@ -44,11 +53,12 @@ public class BaseEnemy : SpriteBase
     internal virtual IEnumerator AttackCastle()
     {
         isAttacking = true;
-        while (true) {
+        while (true)
+        {
             Attack();
             yield return new WaitForSeconds(attackCD);
         }
-        
+
     }
 
     internal virtual void Attack()
@@ -65,7 +75,7 @@ public class BaseEnemy : SpriteBase
     internal virtual void Die()
     {
         DropItem();
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     internal virtual void DropItem()
@@ -91,7 +101,8 @@ public class BaseEnemy : SpriteBase
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        if(hp <= 0) {
+        if (hp <= 0)
+        {
             Die();
         }
     }
@@ -99,5 +110,16 @@ public class BaseEnemy : SpriteBase
     public void CanAttackCastle()
     {
         canAttackCastle = true;
+    }
+
+    private void TakeDamageFromPlayer(object sender, System.EventArgs e)
+    {
+        WeaponCollisionArgs arg = (WeaponCollisionArgs)e;
+        //Debug.Log("DamageFromPlayer to " + arg.enemyAttackedID);
+
+        if ((gameObject == null) || arg.enemyAttackedID != gameObject.GetInstanceID()) return;
+
+        SpritePushback(this, new PlayerCollisionArgs(arg.direction, arg.pushbackValue));
+        TakeDamage(arg.weaponDamage);
     }
 }

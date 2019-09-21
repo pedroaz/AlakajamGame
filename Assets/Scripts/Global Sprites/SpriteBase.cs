@@ -27,7 +27,7 @@ public class SpriteBase : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
-    private void SpritePushback(object sender, System.EventArgs e)
+    protected void SpritePushback(object sender, System.EventArgs e)
     {
         if (!canAct) return;
 
