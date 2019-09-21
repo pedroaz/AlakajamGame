@@ -9,23 +9,19 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        GlobalEvents.OnChangeLevel += ChangeLevel;
+        currentLevel = 1;
     }
 
-    private void OnDestroy()
-    {
-        GlobalEvents.OnCastleDamage -= ChangeLevel;
-    }
 
-    public void ChangeLevel(object sender, System.EventArgs e)
+    public void AddLevel()
     {
-        ChangeLevelArgs arg = (ChangeLevelArgs)e;
-
-        currentLevel = arg.levelToChange;
+        currentLevel++;
     }
 
     public int GetCurrentLevel()
     {
         return currentLevel;
     }
+
+    
 }

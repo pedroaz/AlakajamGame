@@ -18,12 +18,25 @@ public class EnemySpawner : MonoBehaviour
 
     PercentagePicker enemyLevelPercentage;
 
+    private int amountOfEnemyiesSpawned;
+
+    private int amountOfEnemiesKilled;
+
+    GameInitializer gameInitializer;
+
     private void Awake()
     {
         SetSpawnLimits();
-        GlobalEvents.OnGameStart += StartSpawningEnemies;
+        GlobalEvents.OnWaveStart += StartSpawningEnemies;
         levelManager = FindObjectOfType<LevelManager>();
         PopulatePercentagePicker();
+        GlobalEvents.OnEnemyDeath += EnemyDeath;
+        gameInitializer = FindObjectOfType<GameInitializer>();
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEvents.OnEnemyDeath -= EnemyDeath;
     }
 
     private void PopulatePercentagePicker()
@@ -69,32 +82,41 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartSpawningEnemies(object sender, System.EventArgs e)
     {
-        StartCoroutine(StartSpawning());
+        StartCoroutine(StartSpawningWave());
     }
-
 
     private float GetLevelSpawnTimer(int currentLevel)
     {
         
-        switch (currentLevel) {
-            case 1:
-                return 1.5f;
-            default:
-                return 3f;
+        if(currentLevel < 5) {
+            return 5;
+        }
+        else if (currentLevel < 10) {
+            return 4.5f;
+        }else if (currentLevel < 20) {
+            return 3;
+        }
+        else {
+            return 2;
         }
 
     
     }
 
-    IEnumerator StartSpawning()
+    IEnumerator StartSpawningWave()
     {
-        while (true) {
+        for (int i = 0; i < GetAmountOfEnemiesOfLevel(); i++) {
 
             int currentLevel = levelManager.GetCurrentLevel();
             GameObject prefab = GetEnemyPrefab(currentLevel);
             SpawnEnemy(prefab);
             yield return new WaitForSeconds(GetLevelSpawnTimer(currentLevel));
         }
+    }
+
+    public int GetAmountOfEnemiesOfLevel()
+    {
+        return levelManager.GetCurrentLevel() + 2;
     }
 
     private GameObject GetEnemyPrefab(int currentLevel)
@@ -104,8 +126,17 @@ public class EnemySpawner : MonoBehaviour
         return prefab;
     }
 
+    private void EnemyDeath(object sender, System.EventArgs e)
+    {
+        amountOfEnemiesKilled++;
+        if(amountOfEnemiesKilled == GetAmountOfEnemiesOfLevel()) {
+
+        }
+    }
+
     private void SpawnEnemy(GameObject prefab)
     {
+        amountOfEnemyiesSpawned++;
         GameObject newEnemy = Instantiate(listOfEnemies[0], GetRandomSpawnTransform(), Quaternion.identity);
         BaseEnemy baseEnemy = newEnemy.GetComponent<BaseEnemy>();
         baseEnemy.StartActing();

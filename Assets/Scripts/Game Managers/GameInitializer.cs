@@ -4,8 +4,35 @@ using UnityEngine;
 
 public class GameInitializer : MonoBehaviour
 {
+    LevelManager levelManager;
+    LevelPanel levelPanel;
+    private void Awake()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+        levelPanel = FindObjectOfType<LevelPanel>();
+    }
+
     void Start()
     {
-        GlobalEvents.GameStart(this, null);
+        StartNextWave();
+        levelPanel.ShowPanel(1);
+    }
+
+    private void StartNextWave()
+    {
+        GlobalEvents.StartWave(this, null);
+    }
+
+    public void EndWave()
+    {
+        StartCoroutine(NextWave());
+    }
+
+    public IEnumerator NextWave()
+    {
+        levelManager.AddLevel();
+        levelPanel.ShowPanel(levelManager.GetCurrentLevel());
+        yield return new WaitForSeconds(2);
+        StartNextWave();
     }
 }

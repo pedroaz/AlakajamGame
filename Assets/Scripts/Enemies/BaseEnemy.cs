@@ -65,6 +65,7 @@ public class BaseEnemy : MonoBehaviour
     internal virtual void Die()
     {
         DropItem();
+        GlobalEvents.EnemyDeath(this, null);
         Destroy(this);
     }
 

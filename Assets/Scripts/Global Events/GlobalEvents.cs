@@ -7,13 +7,13 @@ public static class GlobalEvents
 {
     public static PlayerControls player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
 
-    public static event EventHandler OnGameStart = delegate { };
+    public static event EventHandler OnWaveStart = delegate { };
 
    
-    public static void GameStart(object sender, EventArgs eventArgs)
+    public static void StartWave(object sender, EventArgs eventArgs)
     {
 
-        OnGameStart(sender, eventArgs);
+        OnWaveStart(sender, eventArgs);
     }
 
    
@@ -43,13 +43,6 @@ public static class GlobalEvents
         OnCastleDamage(sender, eventArgs);
     }
 
-    public static event EventHandler OnChangeLevel = delegate { };
-
-    public static void ChangeLevel(object sender, ChangeLevelArgs eventArgs)
-    {
-        OnChangeLevel(sender, eventArgs);
-    }
-
     public static event EventHandler OnPlayerCollision = delegate { };
 
     public static void PlayerCollision(object sender, PlayerCollisionArgs eventArgs)
@@ -62,6 +55,13 @@ public static class GlobalEvents
     public static void AddGameScore(object sender, GameScoreArgs eventArgs)
     {
         OnAddGameScore(sender, eventArgs);
+    }
+
+    public static event EventHandler OnEnemyDeath = delegate { };
+
+    public static void EnemyDeath(object sender, EventArgs eventArgs)
+    {
+        OnEnemyDeath(sender, eventArgs);
     }
 
 }
@@ -88,11 +88,6 @@ public class CastleDamageArgs : EventArgs
         this.currentCastleHealth = currentCastleHealth;
         this.maxHealth = maxHealth;
     }
-}
-
-public class ChangeLevelArgs : EventArgs
-{
-    public int levelToChange;
 }
 
 public class PlayerCollisionArgs : EventArgs
