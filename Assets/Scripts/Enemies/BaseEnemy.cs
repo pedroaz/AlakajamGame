@@ -41,8 +41,11 @@ public class BaseEnemy : SpriteBase
 
     public virtual void Act()
     {
-        if (canAttackCastle && !isAttacking)
+        if (canAttackCastle)
         {
+            if (isAttacking) {
+                return;
+            }
             StartCoroutine(AttackCastle());
         }
         else
