@@ -3233,6 +3233,8 @@ MonoBehaviour:
   - {fileID: 1651387715}
   - {fileID: 1697415472}
   - {fileID: 838380267}
+  amountOfKillsNecessary: 0
+  amountOfEnemiesKilled: 0
 --- !u!114 &2054890605
 MonoBehaviour:
   m_ObjectHideFlags: 0

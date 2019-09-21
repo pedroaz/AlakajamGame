@@ -71,6 +71,13 @@ public static class GlobalEvents
         OnWeaponCollision(sender, eventArgs);
     }
 
+    public static event EventHandler OnStopEnemies = delegate { };
+
+    public static void StopEnemies(object sender, WeaponCollisionArgs eventArgs)
+    {
+        OnStopEnemies(sender, eventArgs);
+    }
+
 }
 
 public class GameScoreArgs : EventArgs
