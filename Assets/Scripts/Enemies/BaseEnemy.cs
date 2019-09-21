@@ -79,17 +79,4 @@ public class BaseEnemy : MonoBehaviour
     {
 
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        switch (collision.tag)
-        {
-            case "Player":
-                GlobalEvents.PlayerCollision(this, new PlayerCollisionArgs(collision.transform.up, 10));
-                break;
-            case "CASTLE":
-
-                break;
-        }
-    }
 }

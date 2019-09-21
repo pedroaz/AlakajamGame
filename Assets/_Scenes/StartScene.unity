@@ -1165,7 +1165,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.74, y: 0.5}
-    oldSize: {x: 2.13, y: 1.85}
+    oldSize: {x: 3.156, y: 2.612}
     newSize: {x: 4.26, y: 3.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1187,6 +1187,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  pushbackSpeed: 0.5
+  pushbackTimer: 0.2
+  invulnFlashes: 5
+  startingFlashCD: 0.3
 --- !u!50 &1245181729
 Rigidbody2D:
   serializedVersion: 4
@@ -2109,6 +2113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FlipY
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557511123665394723, guid: 54c77bd64d13a954aa41ec3d18d0a806,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9130028048720323264, guid: 54c77bd64d13a954aa41ec3d18d0a806, type: 3}

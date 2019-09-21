@@ -8,6 +8,8 @@ public class EnemyHurtBox : MonoBehaviour
 
     private BaseEnemy baseEnemy;
 
+    public float pushbackStrength = 0.1f;
+
     private void Awake()
     {
         baseEnemy = GetComponentInParent<BaseEnemy>();
@@ -18,6 +20,16 @@ public class EnemyHurtBox : MonoBehaviour
         if(collision.gameObject.layer == playerAttackLayer) {
 
             baseEnemy.TakeDamage(1);
+        }
+
+        switch (collision.tag)
+        {
+            case "Player":
+                GlobalEvents.PlayerCollision(this, new PlayerCollisionArgs(baseEnemy.transform.position, pushbackStrength));
+                break;
+            case "CASTLE":
+
+                break;
         }
     }
 }
