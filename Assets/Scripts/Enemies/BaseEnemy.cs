@@ -77,6 +77,7 @@ public class BaseEnemy : SpriteBase
     {
         DropItem();
         GlobalEvents.EnemyDeath(this, null);
+        Destroy(this.gameObject);
     }
 
     internal virtual void DropItem()
@@ -121,7 +122,7 @@ public class BaseEnemy : SpriteBase
     private void TakeDamageFromPlayer(object sender, System.EventArgs e)
     {
         WeaponCollisionArgs arg = (WeaponCollisionArgs)e;
-
+        Debug.Log("TakeDamageFromPlayer");
         if ((gameObject == null) || arg.enemyAttackedID != gameObject.GetInstanceID()) return;
 
         SpritePushback(this, new PlayerCollisionArgs(arg.direction, arg.pushbackValue));

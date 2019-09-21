@@ -9,7 +9,6 @@ public class PlayerControls : SpriteBase
 
     public GameObject baseWeaponObjLeft;
     public GameObject baseWeaponObjRight;
-    public GameObject playerArea;
 
     void FixedUpdate()
     {
@@ -36,8 +35,6 @@ public class PlayerControls : SpriteBase
 
     IEnumerator PlayerAttack()
     {
-        var playerAreaCollider = playerArea.GetComponent<BoxCollider2D>();
-
         spriteRenderer.flipX = !spriteRenderer.flipX;
         if(!spriteRenderer.flipX)
             baseWeaponObjLeft.SetActive(true);

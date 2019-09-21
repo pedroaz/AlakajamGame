@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CASTLE
   - ITEM_COLLECTION_AREA
+  - WEAPON_DAMAGE_AREA
+  - ENEMY
   layers:
   - Default
   - TransparentFX
