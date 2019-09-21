@@ -18,9 +18,9 @@ public class EnemySpawner : MonoBehaviour
 
     PercentagePicker enemyLevelPercentage;
 
-    private int amountOfEnemyiesSpawned;
+    public int amountOfKillsNecessary;
 
-    private int amountOfEnemiesKilled;
+    public int amountOfEnemiesKilled;
 
     GameInitializer gameInitializer;
 
@@ -82,6 +82,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartSpawningEnemies(object sender, System.EventArgs e)
     {
+        amountOfEnemiesKilled = 0;
         StartCoroutine(StartSpawningWave());
     }
 
@@ -105,6 +106,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator StartSpawningWave()
     {
+        amountOfKillsNecessary = GetAmountOfEnemiesOfLevel();
         for (int i = 0; i < GetAmountOfEnemiesOfLevel(); i++) {
 
             int currentLevel = levelManager.GetCurrentLevel();
@@ -116,6 +118,7 @@ public class EnemySpawner : MonoBehaviour
 
     public int GetAmountOfEnemiesOfLevel()
     {
+        
         return levelManager.GetCurrentLevel() + 2;
     }
 
@@ -136,7 +139,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy(GameObject prefab)
     {
-        amountOfEnemyiesSpawned++;
         GameObject newEnemy = Instantiate(listOfEnemies[0], GetRandomSpawnTransform(), Quaternion.identity);
         BaseEnemy baseEnemy = newEnemy.GetComponent<BaseEnemy>();
         baseEnemy.StartActing();
