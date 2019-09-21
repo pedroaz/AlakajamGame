@@ -2005,6 +2005,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191881637}
   - component: {fileID: 1191881638}
+  - component: {fileID: 1191881639}
   m_Layer: 0
   m_Name: Weapon Collider Left
   m_TagString: ITEM_COLLECTION_AREA
@@ -2052,6 +2053,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.5108118, y: 4.7678413}
   m_EdgeRadius: 0
+--- !u!114 &1191881639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191881636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee781b6c99959ff4f8d64070100ad6fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPushback: 5
+  weaponDamage: 10
 --- !u!1 &1208518604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2166,6 +2181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1261274201}
   - component: {fileID: 1261274202}
+  - component: {fileID: 1261274203}
   m_Layer: 0
   m_Name: Weapon Collider Right
   m_TagString: ITEM_COLLECTION_AREA
@@ -2213,6 +2229,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.5411835, y: 4.7613697}
   m_EdgeRadius: 0
+--- !u!114 &1261274203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261274200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee781b6c99959ff4f8d64070100ad6fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPushback: 5
+  weaponDamage: 10
 --- !u!1 &1363969143
 GameObject:
   m_ObjectHideFlags: 0
