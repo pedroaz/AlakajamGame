@@ -2102,8 +2102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee781b6c99959ff4f8d64070100ad6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPushback: 5
-  weaponDamage: 10
+  weaponPushback: 2
+  weaponDamage: 3
 --- !u!1 &1208518604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,8 +2278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee781b6c99959ff4f8d64070100ad6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPushback: 5
-  weaponDamage: 10
+  weaponPushback: 2
+  weaponDamage: 3
 --- !u!1 &1363969143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,6 +3233,8 @@ MonoBehaviour:
   - {fileID: 1651387715}
   - {fileID: 1697415472}
   - {fileID: 838380267}
+  amountOfKillsNecessary: 0
+  amountOfEnemiesKilled: 0
 --- !u!114 &2054890605
 MonoBehaviour:
   m_ObjectHideFlags: 0

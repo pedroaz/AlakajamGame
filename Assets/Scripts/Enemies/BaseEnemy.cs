@@ -37,6 +37,11 @@ public class BaseEnemy : SpriteBase
         {
             Act();
         }
+
+        if (bIsPushBack)
+        {
+            transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
+        }
     }
 
     public virtual void Act()
