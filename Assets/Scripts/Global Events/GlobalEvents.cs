@@ -47,7 +47,7 @@ public static class GlobalEvents
 
     public static void ChangeLevel(object sender, ChangeLevelArgs eventArgs)
     {
-        OnCastleDamage(sender, eventArgs);
+        OnChangeLevel(sender, eventArgs);
     }
 
 
