@@ -526,8 +526,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.42, y: 1.2333333}
+    pivot: {x: 0.74, y: 0.5}
+    oldSize: {x: 3.156, y: 2.612}
     newSize: {x: 4.26, y: 3.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -549,7 +549,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  boxCollider: {fileID: 1245181726}
 --- !u!50 &1245181729
 Rigidbody2D:
   serializedVersion: 4
@@ -986,7 +985,7 @@ GameObject:
   - component: {fileID: 1844322849}
   m_Layer: 0
   m_Name: Castle
-  m_TagString: Untagged
+  m_TagString: CASTLE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1292,6 +1291,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PLAYER_HUMAN
       objectReference: {fileID: 0}
+    - target: {fileID: 726252787984850409, guid: 54c77bd64d13a954aa41ec3d18d0a806,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6825271835531705608, guid: 54c77bd64d13a954aa41ec3d18d0a806,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1350,13 +1354,13 @@ PrefabInstance:
     - target: {fileID: 4557511123665394723, guid: 54c77bd64d13a954aa41ec3d18d0a806,
         type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4557511123665394723, guid: 54c77bd64d13a954aa41ec3d18d0a806,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a6083140e6fb35145bfc3c74645f1985,
+      objectReference: {fileID: 21300000, guid: 9b39cc81727454546a1e3f5223bc3ed5,
         type: 3}
     - target: {fileID: 4557511123665394723, guid: 54c77bd64d13a954aa41ec3d18d0a806,
         type: 3}
@@ -1372,6 +1376,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557511123665394723, guid: 54c77bd64d13a954aa41ec3d18d0a806,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557511123665394723, guid: 54c77bd64d13a954aa41ec3d18d0a806,
+        type: 3}
+      propertyPath: m_FlipY
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9130028048720323264, guid: 54c77bd64d13a954aa41ec3d18d0a806, type: 3}

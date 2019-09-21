@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class GlobalEvents
 {
-
+    public static PlayerControls player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
 
     public static event EventHandler OnGameStart = delegate { };
 
@@ -50,6 +50,12 @@ public static class GlobalEvents
         OnCastleDamage(sender, eventArgs);
     }
 
+    public static event EventHandler OnPlayerCollision = delegate { player.PlayerPushback(null, new PlayerCollisionArgs(new Vector3(0,1,0), 20)); };
+
+    public static void PlayerCollision(object sender, PlayerCollisionArgs eventArgs)
+    {
+        OnPlayerCollision(sender, eventArgs);
+    }
 
 }
 
@@ -69,5 +75,18 @@ public class CastleDamageArgs : EventArgs
 public class ChangeLevelArgs : EventArgs
 {
     public int levelToChange;
+}
+
+public class PlayerCollisionArgs : EventArgs
+{
+    public Vector3 direction;
+
+    public float pushbackValue;
+
+    public PlayerCollisionArgs(Vector3 direction, float pushbackValue)
+    {
+        this.direction = direction;
+        this.pushbackValue = pushbackValue;
+    }
 }
 
