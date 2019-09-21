@@ -2,37 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControls : MonoBehaviour
+public class PlayerControls : SpriteBase
 {
     public float speed;
+    public float atkSpeed = 0.07f;
 
-    private BoxCollider2D boxCollider;
-    private SpriteRenderer spriteRenderer;
-
-    private bool canMove = true;
-    private bool bIsPushBack = false;
-    public float pushbackSpeed = 0.3f;
-    public float pushbackTimer = 0.2f;
-    public int invulnFlashes = 5;
-    public float startingFlashCD = 0.3f;
-
-    private Vector2 perpDirection;
-
-    private void Awake()
-    {
-        GlobalEvents.OnPlayerCollision += PlayerPushback;
-    }
-
-    void Start()
-    {
-        boxCollider = gameObject.GetComponent<BoxCollider2D>();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-    }
+    public GameObject baseWeaponObjLeft;
+    public GameObject baseWeaponObjRight;
+    public GameObject playerArea;
 
     void FixedUpdate()
     {
         #region Player Movement
-        if (canMove && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+        if (canAct && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             boxCollider.transform.Translate(transform.TransformDirection(input * speed * Time.deltaTime));
@@ -45,57 +27,27 @@ public class PlayerControls : MonoBehaviour
         {
             transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
         }
-    }
 
-    public void PlayerPushback(object sender, System.EventArgs e)
-    {
-        PlayerCollisionArgs arg = (PlayerCollisionArgs) e;
-        //var perpDirection = new Vector2(-1*arg.direction.x, arg.direction.y);
-        perpDirection = (Vector2)(transform.position - arg.direction)*arg.pushbackValue;
-
-        if (canMove)
+        if (canAct && Input.GetKeyUp("space"))
         {
-            bIsPushBack = true;
-            SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-            StartCoroutine(PlayerInvuln(sprites, invulnFlashes, startingFlashCD));
-            StartCoroutine(PlayerSlideBack());
+            StartCoroutine(PlayerAttack());
         }
     }
 
-    IEnumerator PlayerSlideBack()
+    IEnumerator PlayerAttack()
     {
-        yield return new WaitForSeconds(pushbackTimer);
-        if (bIsPushBack) bIsPushBack = false;
+        var playerAreaCollider = playerArea.GetComponent<BoxCollider2D>();
+
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+        if(!spriteRenderer.flipX)
+            baseWeaponObjLeft.SetActive(true);
+        else
+            baseWeaponObjRight.SetActive(true);
+
+        yield return new WaitForSeconds(atkSpeed);
+
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+        baseWeaponObjLeft.SetActive(false);
+        baseWeaponObjRight.SetActive(false);
     }
-
-    IEnumerator PlayerInvuln(SpriteRenderer[] sprites, int numTimes, float intialDelay, bool disable = false)
-    {
-        canMove = false;
-
-        for (int loop = 1; loop <= numTimes; loop++)
-        {
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                if (disable)
-                    sprites[i].enabled = false;
-                else
-                    sprites[i].color = new Color(sprites[i].color.r, sprites[i].color.g, sprites[i].color.b, 0.5f);
-            }
-
-            yield return new WaitForSeconds(intialDelay/loop);
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                if (disable)
-                    sprites[i].enabled = true;
-                else
-                    sprites[i].color = new Color(sprites[i].color.r, sprites[i].color.g, sprites[i].color.b, 1);
-            }
-
-            yield return new WaitForSeconds(intialDelay/loop);
-        }
-
-        canMove = true;
-    }
-
 }

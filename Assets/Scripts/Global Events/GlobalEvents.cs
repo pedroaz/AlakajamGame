@@ -64,6 +64,13 @@ public static class GlobalEvents
         OnEnemyDeath(sender, eventArgs);
     }
 
+    public static event EventHandler OnWeaponCollision = delegate { };
+
+    public static void WeaponCollision(object sender, WeaponCollisionArgs eventArgs)
+    {
+        OnWeaponCollision(sender, eventArgs);
+    }
+
 }
 
 public class GameScoreArgs : EventArgs
@@ -100,6 +107,22 @@ public class PlayerCollisionArgs : EventArgs
     {
         this.direction = direction;
         this.pushbackValue = pushbackValue;
+    }
+}
+
+public class WeaponCollisionArgs : EventArgs
+{
+    public Vector3 direction;
+    public float pushbackValue;
+    public int enemyAttackedID;
+    public int weaponDamage;
+
+    public WeaponCollisionArgs(int enemyAttackedID, Vector3 direction, float pushbackValue, int weaponDamage)
+    {
+        this.direction = direction;
+        this.pushbackValue = pushbackValue;
+        this.enemyAttackedID = enemyAttackedID;
+        this.weaponDamage = weaponDamage;
     }
 }
 

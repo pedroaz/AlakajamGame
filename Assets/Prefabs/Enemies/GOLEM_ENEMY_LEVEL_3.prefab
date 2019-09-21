@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 660987401349281656}
   m_Layer: 0
   m_Name: GOLEM_ENEMY_LEVEL_3
-  m_TagString: Untagged
+  m_TagString: ENEMY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,6 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94df473b8e169014690884605b88fb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushbackTimer: 0.2
+  invulnFlashes: 5
+  startingFlashCD: 0.3
   hp: 15
   speed: 2
   damageToCastle: 7

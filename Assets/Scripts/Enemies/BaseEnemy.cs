@@ -2,48 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemy : MonoBehaviour
+public class BaseEnemy : SpriteBase
 {
     public int hp;
     public float speed;
     public int damageToCastle;
     public int enemyLevel;
-    private bool canAct;
+
     public float attackCD;
 
     private Transform castleTransform;
     private Castle castle;
-    private  bool canAttackCastle;
+    private bool canAttackCastle;
     private bool isAttacking;
 
     public List<GameObject> listOfItems;
     
-
     private void Awake()
     {
         castle = FindObjectOfType<Castle>();
         castleTransform = castle.transform;
+
+        GlobalEvents.OnWeaponCollision += TakeDamageFromPlayer;
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEvents.OnWeaponCollision -= TakeDamageFromPlayer;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown("space")) {
-
-            Die();
-        }
-
-        if (canAct && !isAttacking) {
+        if (canAct && !isAttacking)
+        {
             Act();
         }
     }
 
     public virtual void Act()
     {
-        if (canAttackCastle) {
-
+        if (canAttackCastle)
+        {
             StartCoroutine(AttackCastle());
         }
-        else{
+        else
+        {
             MoveTowardsCastle();
         }
     }
@@ -51,11 +54,12 @@ public class BaseEnemy : MonoBehaviour
     internal virtual IEnumerator AttackCastle()
     {
         isAttacking = true;
-        while (true) {
+        while (true)
+        {
             Attack();
             yield return new WaitForSeconds(attackCD);
         }
-        
+
     }
 
     internal virtual void Attack()
@@ -73,7 +77,6 @@ public class BaseEnemy : MonoBehaviour
     {
         DropItem();
         GlobalEvents.EnemyDeath(this, null);
-        Destroy(this.gameObject);
     }
 
     internal virtual void DropItem()
@@ -104,7 +107,8 @@ public class BaseEnemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        if(hp <= 0) {
+        if (hp <= 0)
+        {
             Die();
         }
     }
@@ -112,5 +116,15 @@ public class BaseEnemy : MonoBehaviour
     public void CanAttackCastle()
     {
         canAttackCastle = true;
+    }
+
+    private void TakeDamageFromPlayer(object sender, System.EventArgs e)
+    {
+        WeaponCollisionArgs arg = (WeaponCollisionArgs)e;
+
+        if ((gameObject == null) || arg.enemyAttackedID != gameObject.GetInstanceID()) return;
+
+        SpritePushback(this, new PlayerCollisionArgs(arg.direction, arg.pushbackValue));
+        TakeDamage(arg.weaponDamage);
     }
 }
