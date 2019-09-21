@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,11 +16,25 @@ public class EnemySpawner : MonoBehaviour
 
     private LevelManager levelManager;
 
+    PercentagePicker enemyLevelPercentage;
+
     private void Awake()
     {
         SetSpawnLimits();
         GlobalEvents.OnGameStart += StartSpawningEnemies;
         levelManager = FindObjectOfType<LevelManager>();
+        PopulatePercentagePicker();
+    }
+
+    private void PopulatePercentagePicker()
+    {
+        enemyLevelPercentage = new PercentagePicker();
+        foreach (GameObject enemy in listOfEnemies) {
+
+            enemyLevelPercentage.AddOption("LEVEL_ONE", 50);
+            enemyLevelPercentage.AddOption("LEVEL_TWO", 35);
+            enemyLevelPercentage.AddOption("LEVEL_THREE", 15);
+        }
     }
 
     private void SetSpawnLimits()
@@ -33,29 +48,28 @@ public class EnemySpawner : MonoBehaviour
     public Vector2 GetRandomSpawnTransform()
     {
 
-        float randomValue = Random.Range(0f, 1f);
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
         // Top
         if (randomValue < 0.25f) {
-            return new Vector2(Random.Range(leftLimit, rightLimit),topLimit);
+            return new Vector2(UnityEngine.Random.Range(leftLimit, rightLimit),topLimit);
         }
         // Right
         else if (randomValue < 0.5f) {
-            return new Vector2(rightLimit, Random.Range(botLimit, topLimit));
+            return new Vector2(rightLimit, UnityEngine.Random.Range(botLimit, topLimit));
         }
         // Bot
         else if (randomValue < 0.75f) {
-            return new Vector2(Random.Range(leftLimit, rightLimit), botLimit);
+            return new Vector2(UnityEngine.Random.Range(leftLimit, rightLimit), botLimit);
         }
         // Left
         else {
-            return new Vector2(leftLimit, Random.Range(botLimit, topLimit));
+            return new Vector2(leftLimit, UnityEngine.Random.Range(botLimit, topLimit));
         }
     }
 
     public void StartSpawningEnemies(object sender, System.EventArgs e)
     {
         StartCoroutine(StartSpawning());
-        
     }
 
 
@@ -86,6 +100,7 @@ public class EnemySpawner : MonoBehaviour
     private GameObject GetEnemyPrefab(int currentLevel)
     {
         GameObject prefab = listOfEnemies[0];
+        
         return prefab;
     }
 

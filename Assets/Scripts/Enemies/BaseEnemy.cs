@@ -15,6 +15,7 @@ public class BaseEnemy : MonoBehaviour
     private Castle castle;
     private  bool canAttackCastle;
     private bool isAttacking;
+    
 
     private void Awake()
     {
