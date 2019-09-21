@@ -59,7 +59,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 4.5
 --- !u!1 &5778819736930672825
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,11 +69,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5778819736930672824}
-  - component: {fileID: 5778819736930672826}
   - component: {fileID: 5778819736930672827}
   - component: {fileID: 6604940066630604067}
+  - component: {fileID: 660987401349281656}
   m_Layer: 0
-  m_Name: ENEMY_DRAGON
+  m_Name: GOLEM_ENEMY_LEVEL_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,32 +88,13 @@ Transform:
   m_GameObject: {fileID: 5778819736930672825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 960674920624609742}
   - {fileID: 8992492418428629493}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5778819736930672826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5778819736930672825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08624faf969060d4ab1ef8732c36c2de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 0
-  speed: 2.5
-  damateToCastle: 0
-  enemyLevel: 0
-  canAct: 0
-  canAttackCastle: 0
-  attackCD: 0
 --- !u!212 &5778819736930672827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -152,8 +133,8 @@ SpriteRenderer:
   m_SortingLayerID: -211150843
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 283f2afe95440824f8a74edd433dd872, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7bf4f52a2360dab4680300077c4a4548, type: 3}
+  m_Color: {r: 0.6759523, g: 0.9245283, b: 0.6797153, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -184,6 +165,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &660987401349281656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5778819736930672825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94df473b8e169014690884605b88fb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 15
+  speed: 2
+  damageToCastle: 7
+  enemyLevel: 2
+  attackCD: 2
 --- !u!1 &7440797619782924297
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,8 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAttackLayer:
     serializedVersion: 2
-    m_Bits: 0
-  pushbackStrength: 2.5
+    m_Bits: 4096
+  pushbackStrength: 0.1
 --- !u!61 &7392098337433145363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -256,5 +254,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 6, y: 9}
   m_EdgeRadius: 0

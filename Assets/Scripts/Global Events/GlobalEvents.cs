@@ -47,7 +47,7 @@ public static class GlobalEvents
 
     public static void ChangeLevel(object sender, ChangeLevelArgs eventArgs)
     {
-        OnCastleDamage(sender, eventArgs);
+        OnChangeLevel(sender, eventArgs);
     }
 
     public static event EventHandler OnPlayerCollision = delegate { };
@@ -57,6 +57,23 @@ public static class GlobalEvents
         OnPlayerCollision(sender, eventArgs);
     }
 
+    public static event EventHandler OnAddGameScore = delegate { };
+
+    public static void AddGameScore(object sender, GameScoreArgs eventArgs)
+    {
+        OnAddGameScore(sender, eventArgs);
+    }
+
+}
+
+public class GameScoreArgs : EventArgs
+{
+    public int scoreToAdd;
+
+    public GameScoreArgs(int scoreToAdd)
+    {
+        this.scoreToAdd = scoreToAdd;
+    }
 }
 
 public class CastleDamageArgs : EventArgs

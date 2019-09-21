@@ -18,10 +18,9 @@ public class PlayerControls : SpriteBase
         }
         #endregion
 
-
         if (bIsPushBack)
         {
-            transform.position = Vector2.Lerp(boxCollider.transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
+            transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
         }
     }
 }

@@ -6,12 +6,17 @@ public class BaseEnemy : SpriteBase
 {
     public int hp;
     public float speed;
-    public int damateToCastle;
+    public int damageToCastle;
     public int enemyLevel;
+
+    private bool canAct;
+    public float attackCD;
+
     private Transform castleTransform;
     private Castle castle;
-    public bool canAttackCastle;
-    public float attackCD;
+    private  bool canAttackCastle;
+    private bool isAttacking;
+    
 
     private void Awake()
     {
@@ -21,7 +26,7 @@ public class BaseEnemy : SpriteBase
 
     private void Update()
     {
-        if (canAct) {
+        if (canAct && !isAttacking) {
             Act();
         }
     }
@@ -38,19 +43,29 @@ public class BaseEnemy : SpriteBase
 
     internal virtual IEnumerator AttackCastle()
     {
-        Attack();
-        yield return new WaitForSeconds(attackCD);
+        isAttacking = true;
+        while (true) {
+            Attack();
+            yield return new WaitForSeconds(attackCD);
+        }
+        
     }
 
     internal virtual void Attack()
     {
-        castle.HurtCastle(damateToCastle);
+        castle.HurtCastle(damageToCastle);
     }
 
     private void MoveTowardsCastle()
     {
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, castleTransform.position, step);
+    }
+
+    internal virtual void Die()
+    {
+        DropItem();
+        Destroy(this);
     }
 
     internal virtual void DropItem()
@@ -75,6 +90,14 @@ public class BaseEnemy : SpriteBase
 
     public void TakeDamage(int damage)
     {
+        hp -= damage;
+        if(hp <= 0) {
+            Die();
+        }
+    }
 
+    public void CanAttackCastle()
+    {
+        canAttackCastle = true;
     }
 }

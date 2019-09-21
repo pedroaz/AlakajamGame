@@ -8,7 +8,7 @@ public class EnemyHurtBox : MonoBehaviour
 
     private BaseEnemy baseEnemy;
 
-    public float pushbackStrength = 1f;
+    public float pushbackStrength = 0.1f;
 
     private void Awake()
     {
