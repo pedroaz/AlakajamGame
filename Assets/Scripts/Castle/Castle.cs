@@ -19,6 +19,15 @@ public class Castle : MonoBehaviour
         GlobalEvents.CastleDamage(this, new CastleDamageArgs(damage, currentHealth, maxHealth));
     }
 
+    public void HealCastle(int heal)
+    {
+        currentHealth += heal;
+        if(currentHealth >= maxHealth) {
+            currentHealth = maxHealth;
+        }
+        GlobalEvents.CastleDamage(this, new CastleDamageArgs(-heal, currentHealth, maxHealth));
+    }
+
     public void FullHealth()
     {
         GlobalEvents.CastleDamage(this, new CastleDamageArgs(0, currentHealth, maxHealth));

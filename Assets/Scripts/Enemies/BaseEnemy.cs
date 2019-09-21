@@ -60,6 +60,12 @@ public class BaseEnemy : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, castleTransform.position, step);
     }
 
+    internal virtual void Die()
+    {
+        DropItem();
+        Destroy(this);
+    }
+
     internal virtual void DropItem()
     {
 
@@ -82,7 +88,10 @@ public class BaseEnemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-
+        hp -= damage;
+        if(hp <= 0) {
+            Die();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

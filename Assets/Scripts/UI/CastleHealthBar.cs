@@ -24,5 +24,6 @@ public class CastleHealthBar : MonoBehaviour
     {
         CastleDamageArgs arg = (CastleDamageArgs)e;
         slider.value = (float)arg.currentCastleHealth / arg.maxHealth;
+        castleHealthText.text = arg.currentCastleHealth.ToString();
     }
 }
