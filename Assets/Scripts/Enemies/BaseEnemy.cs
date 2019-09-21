@@ -13,6 +13,7 @@ public class BaseEnemy : MonoBehaviour
     private Castle castle;
     public bool canAttackCastle;
     public float attackCD;
+    public bool isAttacking;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class BaseEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (canAct) {
+        if (canAct && !isAttacking) {
             Act();
         }
     }
@@ -40,8 +41,12 @@ public class BaseEnemy : MonoBehaviour
 
     internal virtual IEnumerator AttackCastle()
     {
-        Attack();
-        yield return new WaitForSeconds(attackCD);
+        isAttacking = true;
+        while (true) {
+            Attack();
+            yield return new WaitForSeconds(attackCD);
+        }
+        
     }
 
     internal virtual void Attack()
