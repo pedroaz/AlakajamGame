@@ -6,12 +6,13 @@ using TMPro;
 
 public class LevelPanel : MonoBehaviour
 {
-    Image image;
+    public GameObject panel;
     public TextMeshProUGUI text;
+
 
     private void Awake()
     {
-        image = GetComponent<Image>();
+
     }
 
     public void ShowPanel(int level)
@@ -22,22 +23,12 @@ public class LevelPanel : MonoBehaviour
 
     private IEnumerator Disapear()
     {
-        var tempColor = image.color;
-        var textColor = text.color;
-
-
-        textColor.a = 255;
-        text.color = textColor;
-
-        tempColor.a = 255;
-        image.color = tempColor;
+        print("SHOW PANEL");
+        panel.SetActive(true);
 
         yield return new WaitForSeconds(2);
 
-        tempColor.a = 0;
-        image.color = tempColor;
-
-        tempColor.a = 0;
-        text.color = tempColor;
+        panel.SetActive(false);
+        print("HIDE PANEL");
     }
 }

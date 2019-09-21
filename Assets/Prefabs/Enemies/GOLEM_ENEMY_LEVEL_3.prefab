@@ -181,10 +181,11 @@ MonoBehaviour:
   invulnFlashes: 5
   startingFlashCD: 0.3
   hp: 15
-  speed: 2
+  speed: 7
   damageToCastle: 7
   enemyLevel: 2
   attackCD: 2
+  listOfItems: []
 --- !u!1 &7440797619782924297
 GameObject:
   m_ObjectHideFlags: 0

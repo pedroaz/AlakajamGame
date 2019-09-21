@@ -11,6 +11,7 @@ public class Castle : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+        GlobalEvents.CastleDamage(this, new CastleDamageArgs(0, currentHealth, maxHealth));
     }
 
     public void HurtCastle(int damage)

@@ -182,7 +182,7 @@ MonoBehaviour:
   invulnFlashes: 5
   startingFlashCD: 0.3
   hp: 10
-  speed: 1
+  speed: 5
   damageToCastle: 5
   enemyLevel: 1
   attackCD: 3
