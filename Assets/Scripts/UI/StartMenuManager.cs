@@ -2,19 +2,14 @@
 
 public class StartMenuManager : MonoBehaviour
 {
-    public enum SCENENAMES
-    {
-        MenuScene = 0,
-        StartScene = 1
-    }
+    
 
-    public SCENENAMES sceneToLoad;
     public GameObject mainPanel;
     public GameObject creditsPanel;
 
-    public void StartButton()
+    public void LoadScene(string sceneName)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene((int)sceneToLoad);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
     public void ExitButton()
@@ -33,5 +28,24 @@ public class StartMenuManager : MonoBehaviour
     {
         mainPanel.SetActive(true);
         creditsPanel.SetActive(false);
+    }
+
+    public void GoToPortifolio(int i)
+    {
+        if (i == 0) {
+
+        }
+
+        if (i == 1) {
+
+        }
+
+        if (i == 2) {
+
+        }
+
+        if (i == 3) {
+            Application.OpenURL("https://www.settingscon.com/");
+        }
     }
 }
