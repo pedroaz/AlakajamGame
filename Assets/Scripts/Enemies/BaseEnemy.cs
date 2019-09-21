@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemy : MonoBehaviour
+public class BaseEnemy : SpriteBase
 {
     public int hp;
     public float speed;
     public int damateToCastle;
     public int enemyLevel;
-    public bool canAct;
     private Transform castleTransform;
     private Castle castle;
     public bool canAttackCastle;
@@ -30,7 +29,6 @@ public class BaseEnemy : MonoBehaviour
     public virtual void Act()
     {
         if (canAttackCastle) {
-
             StartCoroutine(AttackCastle());
         }
         else{
