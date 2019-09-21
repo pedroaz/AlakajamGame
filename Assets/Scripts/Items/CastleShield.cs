@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StopEnemies : BaseItem
+public class CastleShield : BaseItem
 {
     internal override void CollectItem()
     {
-        GlobalEvents.StopEnemies(this, null);
+        FindObjectOfType<Castle>().Protect();
     }
 }

@@ -15,7 +15,8 @@ public class BaseEnemy : SpriteBase
     private Castle castle;
     private bool canAttackCastle;
     private bool isAttacking;
-
+    private bool stunned = false;
+    
     public List<GameObject> listOfItems;
     
     private void Awake()
@@ -24,11 +25,25 @@ public class BaseEnemy : SpriteBase
         castleTransform = castle.transform;
 
         GlobalEvents.OnWeaponCollision += TakeDamageFromPlayer;
+        GlobalEvents.OnStopEnemies += StunEnemy;
     }
 
     private void OnDestroy()
     {
         GlobalEvents.OnWeaponCollision -= TakeDamageFromPlayer;
+        GlobalEvents.OnStopEnemies -= StunEnemy;
+    }
+
+    private void StunEnemy(object sender, System.EventArgs e)
+    {
+        StartCoroutine(Stun());
+    }
+
+    private IEnumerator Stun()
+    {
+        stunned = true;
+        yield return new WaitForSeconds(3);
+        stunned = false;
     }
 
     private void Update()
@@ -46,6 +61,9 @@ public class BaseEnemy : SpriteBase
 
     public virtual void Act()
     {
+        if (stunned) {
+            return;
+        }
         if (canAttackCastle)
         {
             if (isAttacking) {

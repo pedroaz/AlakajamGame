@@ -7,6 +7,7 @@ public class Castle : MonoBehaviour
 
     public int maxHealth;
     public int currentHealth;
+    private bool sheilded = false;
 
     private void Awake()
     {
@@ -16,8 +17,23 @@ public class Castle : MonoBehaviour
 
     public void HurtCastle(int damage)
     {
+        if (sheilded) {
+            return;
+        }
         currentHealth -= damage;
         GlobalEvents.CastleDamage(this, new CastleDamageArgs(damage, currentHealth, maxHealth));
+    }
+
+    public void Protect()
+    {
+        StartCoroutine(ProtectTimer());
+    }
+
+    public IEnumerator ProtectTimer()
+    {
+        sheilded = true;
+        yield return new WaitForSeconds(5);
+        sheilded = false;
     }
 
     public void HealCastle(int heal)
