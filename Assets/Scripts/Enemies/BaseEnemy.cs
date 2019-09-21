@@ -6,14 +6,15 @@ public class BaseEnemy : MonoBehaviour
 {
     public int hp;
     public float speed;
-    public int damateToCastle;
+    public int damageToCastle;
     public int enemyLevel;
-    public bool canAct;
+    private bool canAct;
+    public float attackCD;
+
     private Transform castleTransform;
     private Castle castle;
-    public bool canAttackCastle;
-    public float attackCD;
-    public bool isAttacking;
+    private  bool canAttackCastle;
+    private bool isAttacking;
 
     private void Awake()
     {
@@ -51,7 +52,7 @@ public class BaseEnemy : MonoBehaviour
 
     internal virtual void Attack()
     {
-        castle.HurtCastle(damateToCastle);
+        castle.HurtCastle(damageToCastle);
     }
 
     private void MoveTowardsCastle()
@@ -92,5 +93,10 @@ public class BaseEnemy : MonoBehaviour
         if(hp <= 0) {
             Die();
         }
+    }
+
+    public void CanAttackCastle()
+    {
+        canAttackCastle = true;
     }
 }

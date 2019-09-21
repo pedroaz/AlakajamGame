@@ -11,7 +11,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool canMove = true;
     private bool bIsPushBack = false;
-    private float pushbackSpeed = 0.3f;
+    public float pushbackSpeed = 0.3f;
     public float pushbackTimer = 0.2f;
     public int invulnFlashes = 5;
     public float startingFlashCD = 0.3f;
@@ -41,27 +41,25 @@ public class PlayerControls : MonoBehaviour
         }
         #endregion
 
-
         if (bIsPushBack)
         {
-            transform.position = Vector2.Lerp(boxCollider.transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
+            transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
         }
     }
 
     public void PlayerPushback(object sender, System.EventArgs e)
     {
-        if (!canMove) return;
-
         PlayerCollisionArgs arg = (PlayerCollisionArgs) e;
+        //var perpDirection = new Vector2(-1*arg.direction.x, arg.direction.y);
+        perpDirection = (Vector2)(transform.position - arg.direction)*arg.pushbackValue;
 
-        bIsPushBack = true;
-        perpDirection = (Vector2)(boxCollider.transform.position - arg.direction)*arg.pushbackValue;
-        perpDirection += (Vector2)boxCollider.transform.position;
-        pushbackSpeed = arg.pushbackValue;
-
-        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-        StartCoroutine(PlayerInvuln(sprites, invulnFlashes, startingFlashCD));
-        StartCoroutine(PlayerSlideBack());
+        if (canMove)
+        {
+            bIsPushBack = true;
+            SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+            StartCoroutine(PlayerInvuln(sprites, invulnFlashes, startingFlashCD));
+            StartCoroutine(PlayerSlideBack());
+        }
     }
 
     IEnumerator PlayerSlideBack()
