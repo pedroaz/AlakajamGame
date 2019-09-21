@@ -50,7 +50,7 @@ public static class GlobalEvents
         OnChangeLevel(sender, eventArgs);
     }
 
-    public static event EventHandler OnPlayerCollision = delegate { player.PlayerPushback(null, new PlayerCollisionArgs(new Vector3(0,1,0), 20)); };
+    public static event EventHandler OnPlayerCollision = delegate { };
 
     public static void PlayerCollision(object sender, PlayerCollisionArgs eventArgs)
     {

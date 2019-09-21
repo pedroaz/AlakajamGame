@@ -1564,6 +1564,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  pushbackSpeed: 0.5
+  pushbackTimer: 0.2
+  invulnFlashes: 5
+  startingFlashCD: 0.3
 --- !u!50 &1245181729
 Rigidbody2D:
   serializedVersion: 4
@@ -2545,6 +2549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FlipY
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557511123665394723, guid: 54c77bd64d13a954aa41ec3d18d0a806,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9130028048720323264, guid: 54c77bd64d13a954aa41ec3d18d0a806, type: 3}
