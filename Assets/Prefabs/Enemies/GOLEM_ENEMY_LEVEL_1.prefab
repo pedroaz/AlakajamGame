@@ -185,10 +185,15 @@ MonoBehaviour:
   speed: 5
   damageToCastle: 5
   enemyLevel: 1
+  chanceToDropItems: 35
   attackCD: 3
   listOfItems:
   - {fileID: 8391833476481187958, guid: 20578911da253c345ac2ca3324abf0c2, type: 3}
   - {fileID: 574381872466009549, guid: 1417a76ad7984394fb182b6224a17e68, type: 3}
+  - {fileID: 574381872466009549, guid: 1e9c5896b943894438dadb2e0d435c3f, type: 3}
+  - {fileID: 574381872466009549, guid: 94fbcaf39ae3a654c940b3601357d0e2, type: 3}
+  - {fileID: 574381872466009549, guid: 07aba0bb7f219704989ce8079f4dcf9e, type: 3}
+  - {fileID: 574381872466009549, guid: e16c291e0cc672043be3a92eb314964e, type: 3}
 --- !u!61 &1191135559603863399
 BoxCollider2D:
   m_ObjectHideFlags: 0
