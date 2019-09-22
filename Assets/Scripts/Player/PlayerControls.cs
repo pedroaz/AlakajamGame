@@ -9,6 +9,8 @@ public class PlayerControls : SpriteBase
 
     public GameObject baseWeaponObjLeft;
     public GameObject baseWeaponObjRight;
+    public GameObject baseWeaponObjUp;
+    public GameObject baseWeaponObjDown;
 
     private bool bIsAttacking = false;
     public Animator spriteAnimator;
@@ -68,6 +70,15 @@ public class PlayerControls : SpriteBase
         {
             StartCoroutine(PlayerAttack());
         }
+
+        if (!spriteAnimator.GetBool("StartAttackAnim"))
+        {
+            baseWeaponObjLeft.SetActive(false);
+            baseWeaponObjRight.SetActive(false);
+            baseWeaponObjUp.SetActive(false);
+            baseWeaponObjDown.SetActive(false);
+            bIsAttacking = false;
+        }
     }
 
     IEnumerator PlayerAttack()
@@ -77,17 +88,20 @@ public class PlayerControls : SpriteBase
         spriteAnimator.SetBool("GoToIdle", false);
         bIsAttacking = true;
 
-        if(!spriteRenderer.flipX)
-            baseWeaponObjLeft.SetActive(true);
-        else
+        if (spriteAnimator.GetBool("WalkingRight"))
             baseWeaponObjRight.SetActive(true);
+        if (spriteAnimator.GetBool("WalkingLeft"))
+            baseWeaponObjLeft.SetActive(true);
+        if (spriteAnimator.GetBool("WalkingUp"))
+            baseWeaponObjUp.SetActive(true);
+        if (spriteAnimator.GetBool("WalkingDown"))
+            baseWeaponObjDown.SetActive(true);
+        if (spriteAnimator.GetBool("GoToIdle"))
+            baseWeaponObjDown.SetActive(true);
 
         yield return new WaitForSeconds(atkSpeed);
 
-        baseWeaponObjLeft.SetActive(false);
-        baseWeaponObjRight.SetActive(false);
-
-        bIsAttacking = false;
+        yield return new WaitForSeconds(0.5f);
         spriteAnimator.SetBool("StartAttackAnim", false);
     }
 
