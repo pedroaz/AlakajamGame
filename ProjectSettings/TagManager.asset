@@ -8,6 +8,7 @@ TagManager:
   - ITEM_COLLECTION_AREA
   - WEAPON_DAMAGE_AREA
   - ENEMY
+  - DEATH
   layers:
   - Default
   - TransparentFX

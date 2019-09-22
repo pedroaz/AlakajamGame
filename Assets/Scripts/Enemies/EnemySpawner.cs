@@ -16,7 +16,6 @@ public class EnemySpawner : MonoBehaviour
 
     private LevelManager levelManager;
 
-    PercentagePicker enemyLevelPercentage;
 
     public int amountOfKillsNecessary;
 
@@ -29,7 +28,6 @@ public class EnemySpawner : MonoBehaviour
         SetSpawnLimits();
         GlobalEvents.OnWaveStart += StartSpawningEnemies;
         levelManager = FindObjectOfType<LevelManager>();
-        PopulatePercentagePicker();
         GlobalEvents.OnEnemyDeath += EnemyDeath;
         gameInitializer = FindObjectOfType<GameInitializer>();
     }
@@ -41,16 +39,7 @@ public class EnemySpawner : MonoBehaviour
         GlobalEvents.OnWaveStart -= StartSpawningEnemies;
     }
 
-    private void PopulatePercentagePicker()
-    {
-        enemyLevelPercentage = new PercentagePicker();
-        foreach (GameObject enemy in listOfEnemies) {
-
-            enemyLevelPercentage.AddOption("LEVEL_ONE", 50);
-            enemyLevelPercentage.AddOption("LEVEL_TWO", 35);
-            enemyLevelPercentage.AddOption("LEVEL_THREE", 15);
-        }
-    }
+   
 
     private void SetSpawnLimits()
     {
@@ -121,12 +110,22 @@ public class EnemySpawner : MonoBehaviour
     public int GetAmountOfEnemiesOfLevel()
     {
         
-        return levelManager.GetCurrentLevel();
+        return levelManager.GetCurrentLevel() + 2;
     }
 
     private GameObject GetEnemyPrefab(int currentLevel)
     {
-        GameObject prefab = listOfEnemies[0];
+
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
+
+        GameObject prefab;
+
+        if (randomValue < 0.2) {
+            prefab = listOfEnemies[1];
+        }
+        else {
+            prefab = listOfEnemies[0];
+        }
         
         return prefab;
     }
@@ -141,7 +140,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy(GameObject prefab)
     {
-        GameObject newEnemy = Instantiate(listOfEnemies[0], GetRandomSpawnTransform(), Quaternion.identity);
+        GameObject newEnemy = Instantiate(prefab, GetRandomSpawnTransform(), Quaternion.identity);
         BaseEnemy baseEnemy = newEnemy.GetComponent<BaseEnemy>();
         baseEnemy.StartActing();
     }

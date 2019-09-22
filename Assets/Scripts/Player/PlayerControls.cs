@@ -17,6 +17,9 @@ public class PlayerControls : SpriteBase
 
     private int hasBeenIdleFor = 0;
 
+    public AudioSource attackAudio;
+    public AudioSource hurtAudio;
+
     void FixedUpdate()
     {
         #region Player Movement
@@ -63,6 +66,10 @@ public class PlayerControls : SpriteBase
 
         if (bIsPushBack)
         {
+            if (!hurtAudio.isPlaying) {
+                hurtAudio.Play();
+            }
+
             transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
         }
 
@@ -83,6 +90,10 @@ public class PlayerControls : SpriteBase
 
     IEnumerator PlayerAttack()
     {
+        if (!attackAudio.isPlaying) {
+            attackAudio.Play();
+        }
+
         hasBeenIdleFor = 0;
         spriteAnimator.SetBool("StartAttackAnim", true);
         //spriteAnimator.SetBool("GoToIdle", false);
