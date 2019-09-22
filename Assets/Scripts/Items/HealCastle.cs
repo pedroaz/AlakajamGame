@@ -8,6 +8,7 @@ public class HealCastle : BaseItem
 
     internal override void CollectItem()
     {
+        GameObject.FindGameObjectWithTag("POWER_UP").GetComponent<AudioSource>().Play();
         FindObjectOfType<Castle>().HealCastle(amountToHeal);
         FindObjectOfType<ItemPanel>().ShowItemPanel(3, "Heal Castle");
     }
