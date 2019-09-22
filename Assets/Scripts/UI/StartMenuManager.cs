@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class StartMenuManager : MonoBehaviour
 {
@@ -6,6 +8,32 @@ public class StartMenuManager : MonoBehaviour
 
     public GameObject mainPanel;
     public GameObject creditsPanel;
+    TMP_InputField inputField;
+    public Button startButton;
+
+    private void Awake()
+    {
+        inputField = FindObjectOfType<TMP_InputField>();
+        CanStart();
+    }
+
+    
+
+    public void CanStart()
+    {
+        if(inputField.text == "") {
+            startButton.interactable = false;
+        }
+        else {
+            startButton.interactable = true;
+        }
+    }
+
+    public void PlayTheGame()
+    {
+        PlayerPrefs.SetString("PLAYER_NAME", inputField.text);
+        LoadScene("StartScene");
+    }
 
     public void LoadScene(string sceneName)
     {
