@@ -20,7 +20,6 @@ public class GameInitializer : MonoBehaviour
 
     private void StartNextWave()
     {
-        print("START NEXT WAVE");
         GlobalEvents.StartWave(this, null);
     }
 

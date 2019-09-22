@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 6604940066630604067}
   - component: {fileID: 660987401349281656}
   - component: {fileID: 1191135559603863399}
+  - component: {fileID: -6565871611361517735}
   m_Layer: 0
   m_Name: GOLEM_ENEMY_LEVEL_1
   m_TagString: ENEMY
@@ -185,7 +186,7 @@ MonoBehaviour:
   speed: 5
   damageToCastle: 5
   enemyLevel: 1
-  chanceToDropItems: 35
+  chanceToDropItems: 100
   attackCD: 3
   listOfItems:
   - {fileID: 8391833476481187958, guid: 20578911da253c345ac2ca3324abf0c2, type: 3}
@@ -220,6 +221,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.83, y: 7.5}
   m_EdgeRadius: 0
+--- !u!95 &-6565871611361517735
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5778819736930672825}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 351d423aa6a92b6408f2fd7f184e25f5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7440797619782924297
 GameObject:
   m_ObjectHideFlags: 0

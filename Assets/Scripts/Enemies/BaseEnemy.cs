@@ -9,7 +9,7 @@ public class BaseEnemy : SpriteBase
     public int damageToCastle;
     public int enemyLevel;
 
-    public float chanceToDropItems = 35f;
+    public float chanceToDropItems = 100f;
 
     public float attackCD;
 
@@ -18,6 +18,8 @@ public class BaseEnemy : SpriteBase
     private bool canAttackCastle;
     private bool isAttacking;
     private bool stunned = false;
+
+    private Animator spriteAnimator;
     
     public List<GameObject> listOfItems;
     
@@ -25,6 +27,8 @@ public class BaseEnemy : SpriteBase
     {
         castle = FindObjectOfType<Castle>();
         castleTransform = castle.transform;
+
+        spriteAnimator = gameObject.GetComponent<Animator>();
 
         GlobalEvents.OnWeaponCollision += TakeDamageFromPlayer;
         GlobalEvents.OnStopEnemies += StunEnemy;
@@ -92,13 +96,31 @@ public class BaseEnemy : SpriteBase
 
     internal virtual void Attack()
     {
+        spriteAnimator.SetBool("WalkingUp", false);
+        spriteAnimator.SetBool("WalkingDown", false);
+
         castle.HurtCastle(damageToCastle);
+
+        var diffVector = castleTransform.transform.position - transform.position;
+        if (diffVector.y <= 0)
+            spriteAnimator.SetBool("AttackingDown", true);
+        else
+            spriteAnimator.SetBool("AttackingUp", true);
     }
 
     private void MoveTowardsCastle()
     {
+        spriteAnimator.SetBool("AttackingUp", false);
+        spriteAnimator.SetBool("AttackingDown", false);
+
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, castleTransform.position, step);
+
+        var diffVector = castleTransform.transform.position - transform.position;
+        if (diffVector.y <= 0)
+            spriteAnimator.SetBool("WalkingDown", true);
+        else
+            spriteAnimator.SetBool("WalkingUp", true);
     }
 
     internal virtual void Die()
