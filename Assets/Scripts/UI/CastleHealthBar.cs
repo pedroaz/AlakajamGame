@@ -7,7 +7,6 @@ using TMPro;
 public class CastleHealthBar : MonoBehaviour
 {
     private Slider slider;
-    public TextMeshProUGUI castleHealthText;
 
     private void Awake()
     {
@@ -24,6 +23,5 @@ public class CastleHealthBar : MonoBehaviour
     {
         CastleDamageArgs arg = (CastleDamageArgs)e;
         slider.value = (float)arg.currentCastleHealth / arg.maxHealth;
-        castleHealthText.text = arg.currentCastleHealth.ToString();
     }
 }
