@@ -36,7 +36,7 @@ public class SpriteBase : MonoBehaviour
     protected void SpritePushback(object sender, System.EventArgs e)
     {
         if (!canAct || boxCollider == null) return;
-
+        Debug.Log("Pushback");
         PlayerCollisionArgs arg = (PlayerCollisionArgs)e;
 
         bIsPushBack = true;

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyHurtBox : MonoBehaviour
 {
-    public LayerMask playerAttackLayer;
-
     private BaseEnemy baseEnemy;
 
     public float pushbackStrength = 0.1f;
@@ -15,20 +13,12 @@ public class EnemyHurtBox : MonoBehaviour
         baseEnemy = GetComponentInParent<BaseEnemy>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == playerAttackLayer) {
-
-            baseEnemy.TakeDamage(1);
-        }
-
-        switch (collision.tag)
+        switch (collision.gameObject.tag)
         {
             case "Player":
                 GlobalEvents.PlayerCollision(this, new PlayerCollisionArgs(baseEnemy.transform.position, pushbackStrength));
-                break;
-            case "CASTLE":
-
                 break;
         }
     }
