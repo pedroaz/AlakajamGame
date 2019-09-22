@@ -44,6 +44,7 @@ public class GameEnder : MonoBehaviour
 
     public void PlayAgain()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

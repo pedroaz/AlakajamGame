@@ -16,7 +16,7 @@ public class EndGamePanel : MonoBehaviour
 
     public void ShowLoading(int currentScore)
     {
-
+        Time.timeScale = 0;
         maxScoreText.text = "High Score: " + PlayerPrefs.GetInt("HIGH_SCORE").ToString();
         currentScoreText.text = "Score: " + currentScore;
 
