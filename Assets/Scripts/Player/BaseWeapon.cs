@@ -14,7 +14,6 @@ public class BaseWeapon : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Collision Start");
         if (collision.tag == "ENEMY")
         {
             GlobalEvents.WeaponCollision(this, new WeaponCollisionArgs(collision.gameObject.GetInstanceID(),

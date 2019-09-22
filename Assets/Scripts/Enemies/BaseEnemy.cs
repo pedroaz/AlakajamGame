@@ -9,6 +9,8 @@ public class BaseEnemy : SpriteBase
     public int damageToCastle;
     public int enemyLevel;
 
+    public float chanceToDropItems = 35f;
+
     public float attackCD;
 
     private Transform castleTransform;
@@ -101,7 +103,10 @@ public class BaseEnemy : SpriteBase
 
     internal virtual void Die()
     {
-        DropItem();
+        var random = Random.Range(0, 100);
+        if(random <= chanceToDropItems)
+            DropItem();
+
         GlobalEvents.EnemyDeath(this, null);
         Destroy(this.gameObject);
     }

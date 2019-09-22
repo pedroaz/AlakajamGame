@@ -9,14 +9,50 @@ public class PlayerControls : SpriteBase
 
     public GameObject baseWeaponObjLeft;
     public GameObject baseWeaponObjRight;
+    public GameObject baseWeaponObjUp;
+    public GameObject baseWeaponObjDown;
 
     private bool bIsAttacking = false;
+    public Animator spriteAnimator;
+
+    private int hasBeenIdleFor = 0;
 
     void FixedUpdate()
     {
         #region Player Movement
+        spriteAnimator.SetBool("GoToIdle", false);
+        spriteAnimator.SetBool("WalkingRight", false);
+        spriteAnimator.SetBool("WalkingLeft", false);
+        spriteAnimator.SetBool("WalkingUp", false);
+        spriteAnimator.SetBool("WalkingDown", false);
+
+        if ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0))
+        {
+            hasBeenIdleFor++;
+        }
+        if(hasBeenIdleFor > 2)
+        {
+            spriteAnimator.SetBool("GoToIdle", true);
+        }
+
         if (canAct && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
+            hasBeenIdleFor = 0;
+            if (Input.GetAxis("Horizontal") != 0)
+            {
+                if (Input.GetAxis("Horizontal") > 0)
+                    spriteAnimator.SetBool("WalkingRight", true);
+                else
+                    spriteAnimator.SetBool("WalkingLeft", true);
+            }
+            if (Input.GetAxis("Vertical") != 0)
+            {
+                if (Input.GetAxis("Vertical") > 0)
+                    spriteAnimator.SetBool("WalkingUp", true);
+                else
+                    spriteAnimator.SetBool("WalkingDown", true);
+            }
+
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             boxCollider.transform.Translate(transform.TransformDirection(input * speed * Time.deltaTime));
 
@@ -34,25 +70,39 @@ public class PlayerControls : SpriteBase
         {
             StartCoroutine(PlayerAttack());
         }
+
+        if (!spriteAnimator.GetBool("StartAttackAnim"))
+        {
+            baseWeaponObjLeft.SetActive(false);
+            baseWeaponObjRight.SetActive(false);
+            baseWeaponObjUp.SetActive(false);
+            baseWeaponObjDown.SetActive(false);
+            bIsAttacking = false;
+        }
     }
 
     IEnumerator PlayerAttack()
     {
+        hasBeenIdleFor = 0;
+        spriteAnimator.SetBool("StartAttackAnim", true);
+        spriteAnimator.SetBool("GoToIdle", false);
         bIsAttacking = true;
 
-        spriteRenderer.flipX = !spriteRenderer.flipX;
-        if(!spriteRenderer.flipX)
-            baseWeaponObjLeft.SetActive(true);
-        else
+        if (spriteAnimator.GetBool("WalkingRight"))
             baseWeaponObjRight.SetActive(true);
+        if (spriteAnimator.GetBool("WalkingLeft"))
+            baseWeaponObjLeft.SetActive(true);
+        if (spriteAnimator.GetBool("WalkingUp"))
+            baseWeaponObjUp.SetActive(true);
+        if (spriteAnimator.GetBool("WalkingDown"))
+            baseWeaponObjDown.SetActive(true);
+        if (spriteAnimator.GetBool("GoToIdle"))
+            baseWeaponObjDown.SetActive(true);
 
         yield return new WaitForSeconds(atkSpeed);
 
-        spriteRenderer.flipX = !spriteRenderer.flipX;
-        baseWeaponObjLeft.SetActive(false);
-        baseWeaponObjRight.SetActive(false);
-
-        bIsAttacking = false;
+        yield return new WaitForSeconds(0.5f);
+        spriteAnimator.SetBool("StartAttackAnim", false);
     }
 
     public void IncreasePlayerStats(int amountAtk, int amountSpeed, float pushBackIncreasePerc, int durationSecs, Color spriteTint)
