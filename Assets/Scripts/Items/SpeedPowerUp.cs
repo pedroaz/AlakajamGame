@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpeedPowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int speedIncrease = 2;
+    public int duration = 15;
 
-    // Update is called once per frame
-    void Update()
+    internal override void CollectItem()
     {
-        
+        GlobalEvents.player.IncreasePlayerStats(0, speedIncrease, 0, duration, new Color(0.1f, 0.7f, 0.1f));
     }
 }

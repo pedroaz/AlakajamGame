@@ -54,4 +54,49 @@ public class PlayerControls : SpriteBase
 
         bIsAttacking = false;
     }
+
+    public void IncreasePlayerStats(int amountAtk, int amountSpeed, float pushBackIncreasePerc, int durationSecs, Color spriteTint)
+    {
+        StartCoroutine(PlayerIncreaseStatsCoroutine(amountAtk, amountSpeed, pushBackIncreasePerc, durationSecs, spriteTint));
+    }
+
+    IEnumerator PlayerIncreaseStatsCoroutine(int amountAtk, int amountSpeed, float pushBackIncreasePerc, int durationSecs, Color spriteTint)
+    {
+        BaseWeapon baseWeaponLeft = baseWeaponObjLeft.GetComponent<BaseWeapon>();
+        BaseWeapon baseWeaponRight = baseWeaponObjRight.GetComponent<BaseWeapon>();
+
+        spriteRenderer.color = spriteTint;
+
+        baseWeaponLeft.weaponDamage += amountAtk;
+        baseWeaponRight.weaponDamage += amountAtk;
+
+        baseWeaponLeft.weaponPushback += amountAtk * pushBackIncreasePerc;
+        baseWeaponRight.weaponPushback += amountAtk * pushBackIncreasePerc;
+
+        speed += amountSpeed;
+
+        yield return new WaitForSeconds(durationSecs * 0.75f);
+
+        //Start blinking only after two thirds of the time is spent.
+        for (var steps = durationSecs * 0.25f; steps <= durationSecs; steps++)
+        {
+            spriteRenderer.color = spriteTint;
+
+            yield return new WaitForSeconds(1f / steps);
+
+            spriteRenderer.color = new Color(1f, 1f, 1f);
+
+            yield return new WaitForSeconds(1f / steps);
+        }
+
+        baseWeaponLeft.weaponDamage -= amountAtk;
+        baseWeaponRight.weaponDamage -= amountAtk;
+
+        baseWeaponLeft.weaponPushback -= amountAtk * pushBackIncreasePerc;
+        baseWeaponRight.weaponPushback -= amountAtk * pushBackIncreasePerc;
+
+        speed -= amountSpeed;
+
+        spriteRenderer.color = new Color(1f, 1f, 1f);
+    }
 }
