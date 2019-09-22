@@ -9,6 +9,8 @@ TagManager:
   - WEAPON_DAMAGE_AREA
   - ENEMY
   - DEATH
+  - POWER_UP
+  - POWER_DOWN
   layers:
   - Default
   - TransparentFX

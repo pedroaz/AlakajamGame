@@ -18,7 +18,10 @@ public class PlayerControls : SpriteBase
     private int hasBeenIdleFor = 0;
 
     public AudioSource attackAudio;
+    public AudioSource attackAudioTwo;
     public AudioSource hurtAudio;
+    public AudioSource hurtAudio2;
+    public AudioSource hurtAudio3;
 
     void FixedUpdate()
     {
@@ -66,8 +69,23 @@ public class PlayerControls : SpriteBase
 
         if (bIsPushBack)
         {
-            if (!hurtAudio.isPlaying) {
-                hurtAudio.Play();
+            if (!hurtAudio.isPlaying && !hurtAudio2.isPlaying && !hurtAudio3.isPlaying) {
+                float randomValue = Random.Range(0f, 1f);
+
+                if(randomValue < 0.33f) {
+
+                    hurtAudio.Play();
+                }
+                else if(randomValue < 0.66f) {
+
+                    hurtAudio2.Play();
+                }
+                else {
+
+                    hurtAudio3.Play();
+                }
+
+                
             }
 
             transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
@@ -90,8 +108,16 @@ public class PlayerControls : SpriteBase
 
     IEnumerator PlayerAttack()
     {
-        if (!attackAudio.isPlaying) {
-            attackAudio.Play();
+        if (!attackAudio.isPlaying && !attackAudioTwo.isPlaying) {
+
+            float randomValue = Random.Range(0f, 1f);
+            if(randomValue < 0.5f) {
+                attackAudio.Play();
+            }
+            else {
+                attackAudioTwo.Play();
+            }
+            
         }
 
         hasBeenIdleFor = 0;
@@ -128,6 +154,7 @@ public class PlayerControls : SpriteBase
 
     IEnumerator PlayerIncreaseStatsCoroutine(int amountAtk, int amountSpeed, float pushBackIncreasePerc, int durationSecs, Color spriteTint)
     {
+        GameObject.FindGameObjectWithTag("POWER_UP").GetComponent<AudioSource>().Play();
         BaseWeapon baseWeaponLeft = baseWeaponObjLeft.GetComponent<BaseWeapon>();
         BaseWeapon baseWeaponRight = baseWeaponObjRight.GetComponent<BaseWeapon>();
 
@@ -164,5 +191,6 @@ public class PlayerControls : SpriteBase
         speed -= amountSpeed;
 
         spriteRenderer.color = new Color(1f, 1f, 1f);
+        GameObject.FindGameObjectWithTag("POWER_DOWN").GetComponent<AudioSource>().Play();
     }
 }

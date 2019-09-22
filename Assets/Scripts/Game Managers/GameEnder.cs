@@ -9,6 +9,7 @@ public class GameEnder : MonoBehaviour
     public EndGamePanel endGamePanel;
     public GameScore gameScore;
     public bool gameHasEnded;
+    public AudioSource endGameSound;
 
     private void Awake()
     {
@@ -56,6 +57,7 @@ public class GameEnder : MonoBehaviour
 
     public IEnumerator EndGame()
     {
+        endGameSound.Play();
         gameHasEnded = true;
 
         ScoreList scoreList = null;
