@@ -58,12 +58,17 @@ public class GameEnder : MonoBehaviour
 
         ScoreList scoreList = null;
 
-        endGamePanel.ShowLoading();
+        endGamePanel.ShowLoading(gameScore.currentGameScore);
 
         string playerName = PlayerPrefs.GetString("PLAYER_NAME");
         string score = gameScore.currentGameScore.ToString();
 
-        string get_url = "https://ship-games-api.herokuapp.com/GoogleSheetsAPI/get_all/1W7kbA0aYOBbAtylJ0NAECanZX8zPjCR8Gh0Gt5FHXqs/GameJam";
+        int currentHighScore = PlayerPrefs.GetInt("HIGH_SCORE");
+        if (gameScore.currentGameScore > currentHighScore) {
+            PlayerPrefs.SetInt("HIGH_SCORE", gameScore.currentGameScore);
+        }
+
+            string get_url = "https://ship-games-api.herokuapp.com/GoogleSheetsAPI/get_all/1W7kbA0aYOBbAtylJ0NAECanZX8zPjCR8Gh0Gt5FHXqs/GameJam";
         string post_url = "https://ship-games-api.herokuapp.com/GoogleSheetsAPI/add_score/" + playerName + " / " + score;
 
        
