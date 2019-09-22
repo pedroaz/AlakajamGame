@@ -23,12 +23,10 @@ public class LevelPanel : MonoBehaviour
 
     private IEnumerator Disapear()
     {
-        print("SHOW PANEL");
         panel.SetActive(true);
 
         yield return new WaitForSeconds(2);
 
         panel.SetActive(false);
-        print("HIDE PANEL");
     }
 }
