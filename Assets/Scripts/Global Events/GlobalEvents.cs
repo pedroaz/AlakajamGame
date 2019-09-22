@@ -9,7 +9,6 @@ public static class GlobalEvents
 
     public static event EventHandler OnWaveStart = delegate { };
 
-   
     public static void StartWave(object sender, EventArgs eventArgs)
     {
 
@@ -19,7 +18,6 @@ public static class GlobalEvents
    
     public static event EventHandler OnGameEnd = delegate { };
 
-   
     public static void GameEnd(object sender, EventArgs eventArgs)
     {
 

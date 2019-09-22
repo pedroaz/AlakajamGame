@@ -18,6 +18,7 @@ public class SpriteBase : MonoBehaviour
 
     private void Awake()
     {
+        GlobalEvents.player = gameObject.GetComponent<PlayerControls>();
         GlobalEvents.OnPlayerCollision += SpritePushback;
     }
 
@@ -34,7 +35,7 @@ public class SpriteBase : MonoBehaviour
 
     protected void SpritePushback(object sender, System.EventArgs e)
     {
-        if (!canAct) return;
+        if (!canAct || boxCollider == null) return;
 
         PlayerCollisionArgs arg = (PlayerCollisionArgs)e;
 
