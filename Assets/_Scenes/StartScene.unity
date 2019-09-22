@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 51010853}
   - component: {fileID: 51010852}
   m_Layer: 5
-  m_Name: 1 (2)
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,6 +328,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 729982597}
   loadingScreen: {fileID: 1182502705}
+  listOfText:
+  - {fileID: 276379570}
+  - {fileID: 915615002}
+  - {fileID: 51010852}
+  - {fileID: 1057956059}
+  - {fileID: 1733439508}
 --- !u!1 &252032599
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,7 +2521,7 @@ GameObject:
   - component: {fileID: 915615003}
   - component: {fileID: 915615002}
   m_Layer: 5
-  m_Name: 1 (1)
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2857,7 +2863,7 @@ GameObject:
   - component: {fileID: 1057956060}
   - component: {fileID: 1057956059}
   m_Layer: 5
-  m_Name: 1 (3)
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4378,7 +4384,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1528606664}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2054890601}
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1528606664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4658,7 +4675,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1607411024}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2054890601}
+        m_MethodName: PlayAgain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1607411024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5149,7 +5177,7 @@ GameObject:
   - component: {fileID: 1733439509}
   - component: {fileID: 1733439508}
   m_Layer: 5
-  m_Name: 1 (4)
+  m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

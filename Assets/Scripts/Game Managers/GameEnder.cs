@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class GameEnder : MonoBehaviour
 {
@@ -11,10 +12,14 @@ public class GameEnder : MonoBehaviour
 
     private void Awake()
     {
-        GlobalEvents.OnCastleDamage += CheckIfGameEnd;
         endGamePanel = FindObjectOfType<EndGamePanel>();
         gameScore = FindObjectOfType<GameScore>();
         gameHasEnded = false;
+    }
+
+    private void OnEnable()
+    {
+        GlobalEvents.OnCastleDamage += CheckIfGameEnd;
     }
 
     private void OnDestroy()
@@ -37,17 +42,35 @@ public class GameEnder : MonoBehaviour
         }
     }
 
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+
     public IEnumerator EndGame()
     {
         gameHasEnded = true;
 
-        endGamePanel.ShowLoading();
+        ScoreList scoreList = null;
 
-        string get_url = "https://ship-games-api.herokuapp.com/GoogleSheetsAPI/get_all/1W7kbA0aYOBbAtylJ0NAECanZX8zPjCR8Gh0Gt5FHXqs/GameJam";
-        string post_url = "https://ship-games-api.herokuapp.com/GoogleSheetsAPI/add_score/Pedro/500";
+        endGamePanel.ShowLoading();
 
         string playerName = PlayerPrefs.GetString("PLAYER_NAME");
         string score = gameScore.currentGameScore.ToString();
+
+        string get_url = "https://ship-games-api.herokuapp.com/GoogleSheetsAPI/get_all/1W7kbA0aYOBbAtylJ0NAECanZX8zPjCR8Gh0Gt5FHXqs/GameJam";
+        string post_url = "https://ship-games-api.herokuapp.com/GoogleSheetsAPI/add_score/" + playerName + " / " + score;
+
+       
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(post_url)) {
+            yield return webRequest.SendWebRequest();
+        }
 
         using (UnityWebRequest webRequest = UnityWebRequest.Get(get_url)) {
             // Request and wait for the desired page.
@@ -61,23 +84,24 @@ public class GameEnder : MonoBehaviour
             }
             else {
                 Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                ScoreList scoreList = JsonUtility.FromJson<ScoreList>("{\"score\":" + webRequest.downloadHandler.text + "}" );
-
-                print(scoreList.list[0].player_name);
+                scoreList = JsonUtility.FromJson<ScoreList>("{\"list\":" + webRequest.downloadHandler.text + "}" );
             }
         }
+
+        endGamePanel.ShowComplete(scoreList);
+
     }
 
 }
 
 [System.Serializable]
-class ScoreList
+public class ScoreList
 {
-    public ScoreData[] list;
+    public ScoreData[] list = new ScoreData[1];
 }
 
 [System.Serializable]
-class ScoreData
+public class ScoreData
 {
     public string row_index;
     public string player_name;
