@@ -121,7 +121,7 @@ public class EnemySpawner : MonoBehaviour
     public int GetAmountOfEnemiesOfLevel()
     {
         
-        return levelManager.GetCurrentLevel() + 2;
+        return levelManager.GetCurrentLevel();
     }
 
     private GameObject GetEnemyPrefab(int currentLevel)

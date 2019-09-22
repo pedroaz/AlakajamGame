@@ -9,5 +9,6 @@ public class HealCastle : BaseItem
     internal override void CollectItem()
     {
         FindObjectOfType<Castle>().HealCastle(amountToHeal);
+        FindObjectOfType<ItemPanel>().ShowItemPanel(3, "Heal Castle");
     }
 }

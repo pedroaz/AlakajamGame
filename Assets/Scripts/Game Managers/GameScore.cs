@@ -11,11 +11,12 @@ public class GameScore : MonoBehaviour
     {
         GlobalEvents.OnAddGameScore += UpdateGameScore;
         gameScoreUI = FindObjectOfType<GameScoreUI>();
+        ResetGameScore();
     }
 
     private void OnDestroy()
     {
-        GlobalEvents.OnCastleDamage -= UpdateGameScore;
+        GlobalEvents.OnAddGameScore -= UpdateGameScore;
     }
 
     public void UpdateGameScore(object sender, System.EventArgs e)
@@ -27,6 +28,7 @@ public class GameScore : MonoBehaviour
 
     public void ResetGameScore()
     {
+        currentGameScore = 0;
         GlobalEvents.AddGameScore(this, new GameScoreArgs(0));
     }
 }
