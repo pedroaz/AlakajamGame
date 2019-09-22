@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpeedPowerUp : MonoBehaviour
+public class SpeedPowerUp : BaseItem
 {
     public int speedIncrease = 2;
     public int duration = 15;
