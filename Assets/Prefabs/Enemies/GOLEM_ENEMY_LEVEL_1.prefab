@@ -184,7 +184,7 @@ MonoBehaviour:
   startingFlashCD: 0.3
   hp: 10
   speed: 5
-  damageToCastle: 50
+  damageToCastle: 5
   enemyLevel: 1
   chanceToDropItems: 100
   attackCD: 3
