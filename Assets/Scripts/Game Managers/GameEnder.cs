@@ -50,6 +50,7 @@ public class GameEnder : MonoBehaviour
 
     public void MainMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MenuScene");
     }
 
