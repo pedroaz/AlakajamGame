@@ -10,6 +10,8 @@ public class StartMenuManager : MonoBehaviour
     public GameObject creditsPanel;
     TMP_InputField inputField;
     public Button startButton;
+    public AudioSource uiSound;
+    public AudioSource playSound;
 
     private void Awake()
     {
@@ -34,6 +36,7 @@ public class StartMenuManager : MonoBehaviour
 
     public void PlayTheGame()
     {
+        playSound.Play();
         PlayerPrefs.SetString("PLAYER_NAME", inputField.text);
         LoadScene("StartScene");
     }
@@ -51,18 +54,21 @@ public class StartMenuManager : MonoBehaviour
 
     public void CreditsButton()
     {
+        playSound.Play();
         mainPanel.SetActive(false);
         creditsPanel.SetActive(true);
     }
 
     public void ReturnButton()
     {
+        playSound.Play();
         mainPanel.SetActive(true);
         creditsPanel.SetActive(false);
     }
 
     public void GoToPortifolio(int i)
     {
+        playSound.Play();
         if (i == 0) {
 
             Application.OpenURL("https://guilhermenery.artstation.com/");
