@@ -11,12 +11,46 @@ public class PlayerControls : SpriteBase
     public GameObject baseWeaponObjRight;
 
     private bool bIsAttacking = false;
+    public Animator spriteAnimator;
+
+    private int hasBeenIdleFor = 0;
 
     void FixedUpdate()
     {
         #region Player Movement
+        spriteAnimator.SetBool("GoToIdle", false);
+        spriteAnimator.SetBool("WalkingRight", false);
+        spriteAnimator.SetBool("WalkingLeft", false);
+        spriteAnimator.SetBool("WalkingUp", false);
+        spriteAnimator.SetBool("WalkingDown", false);
+
+        if ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0))
+        {
+            hasBeenIdleFor++;
+        }
+        if(hasBeenIdleFor > 2)
+        {
+            spriteAnimator.SetBool("GoToIdle", true);
+        }
+
         if (canAct && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
+            hasBeenIdleFor = 0;
+            if (Input.GetAxis("Horizontal") != 0)
+            {
+                if (Input.GetAxis("Horizontal") > 0)
+                    spriteAnimator.SetBool("WalkingRight", true);
+                else
+                    spriteAnimator.SetBool("WalkingLeft", true);
+            }
+            if (Input.GetAxis("Vertical") != 0)
+            {
+                if (Input.GetAxis("Vertical") > 0)
+                    spriteAnimator.SetBool("WalkingUp", true);
+                else
+                    spriteAnimator.SetBool("WalkingDown", true);
+            }
+
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             boxCollider.transform.Translate(transform.TransformDirection(input * speed * Time.deltaTime));
 
