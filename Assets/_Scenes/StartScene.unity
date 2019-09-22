@@ -6910,6 +6910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfEnemies:
+  - {fileID: 5778819736930672825, guid: 6544e11b597dda44ba46d446df9d88ff, type: 3}
+  - {fileID: 5778819736930672825, guid: 6544e11b597dda44ba46d446df9d88ff, type: 3}
   - {fileID: 6341297985895901852, guid: 306f1f03040512940ace187d8a6c99ee, type: 3}
   - {fileID: 6341297985895901852, guid: 306f1f03040512940ace187d8a6c99ee, type: 3}
   spawnLimits:
