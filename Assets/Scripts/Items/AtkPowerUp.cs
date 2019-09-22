@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AtkPowerUp : MonoBehaviour
+public class AtkPowerUp : BaseItem
 {
     public int atkIncrease = 2;
     public float pushbackPerc = 0.45f;
