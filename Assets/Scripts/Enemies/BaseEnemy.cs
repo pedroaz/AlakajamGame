@@ -108,6 +108,7 @@ public class BaseEnemy : SpriteBase
             DropItem();
 
         GlobalEvents.EnemyDeath(this, null);
+        GlobalEvents.AddGameScore(this, new GameScoreArgs(10));
         Destroy(this.gameObject);
     }
 
@@ -148,6 +149,10 @@ public class BaseEnemy : SpriteBase
     public void CanAttackCastle(bool value)
     {
         canAttackCastle = value;
+        if (!canAttackCastle) {
+            isAttacking = false;
+            StopCoroutine("AttackCastle");
+        }
     }
 
     private void TakeDamageFromPlayer(object sender, System.EventArgs e)

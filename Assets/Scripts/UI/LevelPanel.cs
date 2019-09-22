@@ -17,7 +17,7 @@ public class LevelPanel : MonoBehaviour
 
     public void ShowPanel(int level)
     {
-        text.text = "Level: " + level.ToString();
+        text.text = "Wave: " + level.ToString();
         StartCoroutine(Disapear());   
     }
 

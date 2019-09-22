@@ -65,14 +65,17 @@ public class StartMenuManager : MonoBehaviour
     {
         if (i == 0) {
 
+            Application.OpenURL("https://guilhermenery.artstation.com/");
         }
 
         if (i == 1) {
 
+            Application.OpenURL("https://gustavomaranhao.carbonmade.com/");
         }
 
         if (i == 2) {
 
+            Application.OpenURL("https://www.pedroazvm.com/");
         }
 
         if (i == 3) {

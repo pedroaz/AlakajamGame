@@ -8,5 +8,6 @@ public class SpeedPowerUp : BaseItem
     internal override void CollectItem()
     {
         GlobalEvents.player.IncreasePlayerStats(0, speedIncrease, 0, duration, new Color(0.1f, 0.7f, 0.1f));
+        FindObjectOfType<ItemPanel>().ShowItemPanel(4, "Speed Up");
     }
 }

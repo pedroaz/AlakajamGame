@@ -9,6 +9,7 @@ public class ExtraPoint : BaseItem
     
     internal override void CollectItem()
     {
-        GlobalEvents.AddGameScore(this, new GameScoreArgs(extraPointToAdd));    
+        GlobalEvents.AddGameScore(this, new GameScoreArgs(extraPointToAdd));
+        FindObjectOfType<ItemPanel>().ShowItemPanel(2, "Extra Points");
     }
 }
