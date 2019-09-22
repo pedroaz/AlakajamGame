@@ -72,9 +72,11 @@ public class PlayerControls : SpriteBase
 
     IEnumerator PlayerAttack()
     {
+        hasBeenIdleFor = 0;
+        spriteAnimator.SetBool("StartAttackAnim", true);
+        spriteAnimator.SetBool("GoToIdle", false);
         bIsAttacking = true;
 
-        spriteRenderer.flipX = !spriteRenderer.flipX;
         if(!spriteRenderer.flipX)
             baseWeaponObjLeft.SetActive(true);
         else
@@ -82,11 +84,11 @@ public class PlayerControls : SpriteBase
 
         yield return new WaitForSeconds(atkSpeed);
 
-        spriteRenderer.flipX = !spriteRenderer.flipX;
         baseWeaponObjLeft.SetActive(false);
         baseWeaponObjRight.SetActive(false);
 
         bIsAttacking = false;
+        spriteAnimator.SetBool("StartAttackAnim", false);
     }
 
     public void IncreasePlayerStats(int amountAtk, int amountSpeed, float pushBackIncreasePerc, int durationSecs, Color spriteTint)
