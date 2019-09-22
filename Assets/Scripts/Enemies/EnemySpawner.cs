@@ -34,9 +34,11 @@ public class EnemySpawner : MonoBehaviour
         gameInitializer = FindObjectOfType<GameInitializer>();
     }
 
+
     private void OnDestroy()
     {
         GlobalEvents.OnEnemyDeath -= EnemyDeath;
+        GlobalEvents.OnWaveStart -= StartSpawningEnemies;
     }
 
     private void PopulatePercentagePicker()
