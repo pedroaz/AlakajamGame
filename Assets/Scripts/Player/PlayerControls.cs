@@ -83,7 +83,6 @@ public class PlayerControls : SpriteBase
 
     IEnumerator PlayerAttack()
     {
-        Debug.Log("Attacking");
         hasBeenIdleFor = 0;
         spriteAnimator.SetBool("StartAttackAnim", true);
         //spriteAnimator.SetBool("GoToIdle", false);
@@ -99,7 +98,6 @@ public class PlayerControls : SpriteBase
             baseWeaponObjDown.SetActive(true);
         if (spriteAnimator.GetBool("GoToIdle"))
         {
-            Debug.Log("GotToIdle");
             if (spriteRenderer.flipX)
                 baseWeaponObjLeft.SetActive(true);
             else
