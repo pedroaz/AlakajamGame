@@ -189,6 +189,8 @@ MonoBehaviour:
   listOfItems:
   - {fileID: 8391833476481187958, guid: 20578911da253c345ac2ca3324abf0c2, type: 3}
   - {fileID: 574381872466009549, guid: 1417a76ad7984394fb182b6224a17e68, type: 3}
+  - {fileID: 574381872466009549, guid: 8583058af11ff3d4aa0151a83eee56b1, type: 3}
+  - {fileID: 574381872466009549, guid: dcb9c7589d6b94c4b9992b427d43e86a, type: 3}
 --- !u!61 &1191135559603863399
 BoxCollider2D:
   m_ObjectHideFlags: 0
