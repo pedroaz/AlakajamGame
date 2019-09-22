@@ -120,8 +120,25 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject prefab;
 
-        if (randomValue < 0.2) {
+        if (randomValue < 0.1) {
+
+            prefab = listOfEnemies[3];
+        }
+        else if (randomValue < 0.2) {
+
+            prefab = listOfEnemies[4];
+        }
+        else if (randomValue < 0.3) {
+
+            prefab = listOfEnemies[5];
+        }
+        else if (randomValue < 0.5) {
+
             prefab = listOfEnemies[1];
+        }
+        else if (randomValue < 0.7) {
+
+            prefab = listOfEnemies[2];
         }
         else {
             prefab = listOfEnemies[0];
