@@ -66,7 +66,7 @@ public class PlayerControls : SpriteBase
             transform.position = Vector2.Lerp(transform.position, perpDirection, pushbackSpeed * Time.fixedDeltaTime);
         }
 
-        if (canAct && Input.GetKeyUp("space") && !bIsAttacking)
+        if (canAct && Input.GetKeyUp("space"))
         {
             StartCoroutine(PlayerAttack());
         }
@@ -85,7 +85,7 @@ public class PlayerControls : SpriteBase
     {
         hasBeenIdleFor = 0;
         spriteAnimator.SetBool("StartAttackAnim", true);
-        spriteAnimator.SetBool("GoToIdle", false);
+        //spriteAnimator.SetBool("GoToIdle", false);
         bIsAttacking = true;
 
         if (spriteAnimator.GetBool("WalkingRight"))
@@ -97,7 +97,12 @@ public class PlayerControls : SpriteBase
         if (spriteAnimator.GetBool("WalkingDown"))
             baseWeaponObjDown.SetActive(true);
         if (spriteAnimator.GetBool("GoToIdle"))
-            baseWeaponObjDown.SetActive(true);
+        {
+            if (spriteRenderer.flipX)
+                baseWeaponObjLeft.SetActive(true);
+            else
+                baseWeaponObjRight.SetActive(true);
+        }
 
         yield return new WaitForSeconds(atkSpeed);
 
