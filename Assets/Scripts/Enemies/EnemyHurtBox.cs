@@ -18,7 +18,7 @@ public class EnemyHurtBox : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Player":
-                GlobalEvents.PlayerCollision(this, new PlayerCollisionArgs(baseEnemy.transform.position, pushbackStrength));
+                //GlobalEvents.PlayerCollision(this, new PlayerCollisionArgs(baseEnemy.transform.position, pushbackStrength));
                 break;
         }
     }
