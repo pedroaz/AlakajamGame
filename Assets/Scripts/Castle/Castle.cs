@@ -8,6 +8,7 @@ public class Castle : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     private bool sheilded = false;
+    public GameObject shieldSprite;
 
     private void Awake()
     {
@@ -31,9 +32,11 @@ public class Castle : MonoBehaviour
 
     public IEnumerator ProtectTimer()
     {
+        shieldSprite.SetActive(true);
         sheilded = true;
         yield return new WaitForSeconds(5);
         sheilded = false;
+        shieldSprite.SetActive(false);
     }
 
     public void HealCastle(int heal)

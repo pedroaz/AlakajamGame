@@ -11,6 +11,8 @@ public class BaseEnemy : SpriteBase
 
     public float chanceToDropItems = 100f;
 
+    public AudioSource audioHurt;
+
     public float attackCD;
 
     private Transform castleTransform;
@@ -125,12 +127,14 @@ public class BaseEnemy : SpriteBase
 
     internal virtual void Die()
     {
+        GameObject.FindGameObjectWithTag("DEATH").GetComponent<AudioSource>().Play();
         var random = Random.Range(0, 100);
         if(random <= chanceToDropItems)
             DropItem();
 
         GlobalEvents.EnemyDeath(this, null);
         GlobalEvents.AddGameScore(this, new GameScoreArgs(10));
+        
         Destroy(this.gameObject);
     }
 
@@ -140,6 +144,7 @@ public class BaseEnemy : SpriteBase
 
             int index = Random.Range(0, listOfItems.Count);
             GameObject item = Instantiate(listOfItems[index], this.transform.position, Quaternion.identity);
+            item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, -1);
         }
         
     }
@@ -161,6 +166,7 @@ public class BaseEnemy : SpriteBase
 
     public void TakeDamage(int damage)
     {
+        audioHurt.Play();
         hp -= damage;
         if (hp <= 0)
         {
