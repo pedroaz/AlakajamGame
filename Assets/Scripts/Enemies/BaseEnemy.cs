@@ -145,9 +145,9 @@ public class BaseEnemy : SpriteBase
         }
     }
 
-    public void CanAttackCastle()
+    public void CanAttackCastle(bool value)
     {
-        canAttackCastle = true;
+        canAttackCastle = value;
     }
 
     private void TakeDamageFromPlayer(object sender, System.EventArgs e)

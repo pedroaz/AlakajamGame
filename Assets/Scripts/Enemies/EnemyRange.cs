@@ -15,7 +15,14 @@ public class EnemyRange : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "CASTLE") {
-            baseEnemy.CanAttackCastle();
+            baseEnemy.CanAttackCastle(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "CASTLE") {
+            baseEnemy.CanAttackCastle(false);
         }
     }
 }
