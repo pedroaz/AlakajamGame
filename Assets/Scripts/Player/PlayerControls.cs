@@ -154,7 +154,7 @@ public class PlayerControls : SpriteBase
 
     IEnumerator PlayerIncreaseStatsCoroutine(int amountAtk, int amountSpeed, float pushBackIncreasePerc, int durationSecs, Color spriteTint)
     {
-        GameObject.FindGameObjectWithTag("POWER_UP").GetComponent<AudioSource>().Play();
+        
         BaseWeapon baseWeaponLeft = baseWeaponObjLeft.GetComponent<BaseWeapon>();
         BaseWeapon baseWeaponRight = baseWeaponObjRight.GetComponent<BaseWeapon>();
 

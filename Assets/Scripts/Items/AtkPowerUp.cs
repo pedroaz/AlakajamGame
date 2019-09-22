@@ -8,6 +8,7 @@ public class AtkPowerUp : BaseItem
 
     internal override void CollectItem()
     {
+        GameObject.FindGameObjectWithTag("POWER_UP").GetComponent<AudioSource>().Play();
         GlobalEvents.player.IncreasePlayerStats(atkIncrease, 0, pushbackPerc, duration, new Color(0.7f, 0.1f, 0.1f));
         FindObjectOfType<ItemPanel>().ShowItemPanel(0, "Attack Up");
     }
