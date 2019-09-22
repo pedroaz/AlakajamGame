@@ -14,7 +14,10 @@ public class StartMenuManager : MonoBehaviour
     private void Awake()
     {
         inputField = FindObjectOfType<TMP_InputField>();
-        CanStart();
+
+        if(inputField!= null) {
+            CanStart();
+        }
     }
 
     
