@@ -86,7 +86,7 @@ public class BaseEnemy : SpriteBase
     internal virtual IEnumerator AttackCastle()
     {
         isAttacking = true;
-        while (true)
+        while (true && !stunned)
         {
             Attack();
             yield return new WaitForSeconds(attackCD);
